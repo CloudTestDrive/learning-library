@@ -168,8 +168,8 @@ As of V3 of the Terraform provider, you do not need to manually install the prov
 **Below steps are only shown for people still running older versions.  If you did a fresh install of the latest version of terraform, you can skipp below instructions and move to Step 6**
 
 
----
----
+
+
 
 
 
