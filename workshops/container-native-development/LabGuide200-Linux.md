@@ -159,6 +159,20 @@ export PATH=$PATH:`pwd`
 ```
 ### **STEP 5**: Download the OCI Terraform Provider
 
+ATTENTION!
+
+As of V3 of the Terraform provider, you do not need to manually install the provider yourself.  Instead, it will be provisioned automatically through the "terraform init" command.
+
+
+
+**Below steps are only shown for people still running older versions.  If you did a fresh install of the latest version of terraform, you can skipp below instructions and move to Step 6**
+
+
+---
+---
+
+
+
 - Download the **OCI Terraform Provider** from the [GitHub release page](https://github.com/oracle/terraform-provider-oci/releases/latest). Select the package for your operating system. **Note:** for **Mac** use a **darwin** version of the tar file.
 
   ![](images/200/59.png)
