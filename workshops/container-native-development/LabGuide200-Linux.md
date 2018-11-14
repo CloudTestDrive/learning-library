@@ -350,6 +350,9 @@ As of V3 of the Terraform provider, you do not need to manually install the prov
 
 - Great! We've got Kubernetes installed and accessible -- now we're ready to get our microservice deployed to the cluster. The next step is to tell Wercker how and where we would like to deploy our application. In your **terminal window**, press **Control-C** to terminate `kubectl proxy`. We will need the terminal window to gather some cluster info in another step. We'll start the proxy again later.
 
+*Remark:* In case your kubectl commands time out, you might have to add an extra rule to your OCI network configuration.  To do this, navigate to your VCN configuration ("Networking", "Virtual CLoud Networks", select your VCN "kubernetes", then in the list of subnets find the one named "PublicK8SMasterSubnetAD1", and click on the associated security list called "k8sMaster_security_list".  Here you must click on the "Edit all rulles" button, scroll to the bottom and add a new Ingress rule using the "+ Another Ingress Rule" button.
+Leave the "Stateless" flag unselected, enter "0.0.0.0/0" in the source SIDR, and select "All Protocols".  Now scroll to the top to use the "Save" button.
+
 ## Configure and Run Wercker Deployment Pipelines
 
 ### **STEP 8**: Define Kubernetes Deployment Specification
