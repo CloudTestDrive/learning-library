@@ -1,34 +1,12 @@
 
 # Docker Workshop
 
-![](images/100Mac/Title100.png) 
-
-Updated: January 24, 2018
-
-## Overview
-
-What is Docker? What is a container?
-
-- Docker is the company and containerization technology.
-- [Docker Documentation](https://docs.docker.com)
-- A container is a runtime instance of a docker image: [Container Documentation](https://docs.docker.com/glossary/?term=container)
-
-Containers have been around for many years. Docker created a technology that was usable by mere humans, and was much easier to understand than before. Thus, has enjoyed a tremendous amount of support for creating a technology for packaging applications to be portable and lightweight.
-
-### VM vs Container
-
-![](images/100Linux/Picture025-1.png)
-
-While containers may sound like a virtual machine (VM), the two are distinct technologies. With VMs each virtual machine includes the application, the necessary binaries and libraries and the entire guest operating system.
-
-Whereas, Containers include the application, all of its dependencies, but share the kernel with other containers and are not tied to any specific infrastructure, other than having the Docker engine installed on it’s host – allowing containers to run on almost any computer, infrastructure and cloud.
-
-**Note:** At this time, Windows and Linux containers require that they run on their respective kernel base, therefore, Windows containers cannot run on Linux hosts and vice versa.
+![](images/100Linux/Title100.png)
 
 ## Introduction
 In this lab we introduce some basic concepts of Docker, container architectures and functions.  We will do this using a single container which provides a REST service as part of a node.js application.  The application has two pieces, which provide a microservice.
 
-- Datasource: a simple JSON file included in the container
+- Datasource: A simple JSON file included in the container
 - REST Client: To serve up data from the datasource
 
 You will use various Docker commands to setup, run and connect into containers. In this introduction you will explore concepts of Docker volumes, networking and container architecture.
@@ -46,11 +24,11 @@ You will use various Docker commands to setup, run and connect into containers. 
 ## Required Artifacts
 
 - Docker Hub Account: [Docker Hub](https://hub.docker.com/)
-- Docker and GIT installed in your own Linux environment (this guide is tailored to Linux) you can decide if you want to run locally or, you can use an available Linux based VirtualBox image
+- Docker and GIT installed in your own Linux environment
 
 # Start up and login into your Linux environment
 
-If you chose to use your own Linux installation then login and verify that the Docker engine is up and running. 
+This Lab and Lab 200 assume you have went through the 050 Set Up Lab and have SSH'ed into that Compute Instance. Verify that the Docker engine is up and running.
 
 **NOTE**: The screen shots in this lab guide are using the available Linux VirtualBox VM
 
@@ -58,11 +36,11 @@ If you chose to use your own Linux installation then login and verify that the D
 
 ### **STEP 1**: Open up a Terminal Window
 
-- Right-click and open up a terminal session.
-
-![](images/100Linux/Picture050-1.png)
+- Make sure you are in a SSH terminal session (`Assumes login via Lab 050`). **You can follow Step 9 in Lab 050 to re-login if you need to...**
 
 ### **STEP 2**: Verify that Docker is running
+
+**NOTE: For the duration of the Labs it's OK that the login user (holuser vs. opc) and the Docker version may vary from the screenshots**
 
 - **Type** the following:
 
@@ -89,7 +67,7 @@ docker ps
 
 ### **STEP 4**: Run the restclient docker image from docker hub
 
-We will now download and create a container based on an existing docker image stored in the Docker Hub. It uses a JSON formatted datafile to serve the test data via its exposed REST service. Docker looks for the designated image locally first before going to Docker HUB.
+We will now download and create a container based on an existing docker image stored in the Docker Hub. It uses a JSON formatted datafile to serve up test data via its exposed REST service. Docker looks for the designated image locally first before going to Docker HUB.
 
 - Let's take a look at what the docker **run** command options do:
     - "-d" flag runs the container in the background
@@ -102,7 +80,7 @@ We will now download and create a container based on an existing docker image st
 
 - **Type OR cut and paste** the following (all on one line):
 
-``` 
+```
 docker run -d -it --rm --name restclient -p=8002:8002 -e DS='json' wvbirder/restclient
 ```
 
@@ -124,15 +102,29 @@ docker ps
 
 ### **STEP 6**: Check the Application with a browser
 
-- Navigate in a browser to:
+- We need the Public IP address to test the deployment. Navigate in a browser to your Oracle Trial account and from the hamburger menu in the upper left hand side of the page select go to **Compute-->Instances**:
+
+![](images/100Linux/26.png)
+
+- Click on the **Docker** instance link
+
+![](images/100Linux/Picture100-5-4.png)
+
+- Note the Public IP address (In this example, `129.213.119.105`
+
+![](images/100Linux/Picture100-5-6.png)
+
+- Go to this URL substituting your Public IP address
 
 ```
-http://localhost:8002/
+http://<Public-IP>:8002/
 ```
 
 ![](images/100Linux/Picture100-6.png)
 
-- Now enter this URL into your browser :  `http://localhost:8002/products`
+- Now enter this URL into your browser :  `http://<Public-IP>:8002/products`
+
+If your browser contains a JSON Formatter add-on then the output will look something like this (else, it will just be unformatted text, which is OK):
 
 ![](images/100Linux/Picture100-7.png)
 
@@ -174,7 +166,7 @@ docker run -d -it --rm --name restclient -p=18002:8002 -e DS='json' wvbirder/res
 
 ### **STEP 9**: Inspect the Container's Network and IP Address
 
-- You can get various bits of information of the subnet that docker container is running on by inspecting the default network bridge docker creates out-of-the-box. You can create your own networks and assign containers to them but that is out of the scope of this lab. 
+- You can get various bits of information from the subnet that docker container is running on by inspecting the default network bridge docker creates out-of-the-box. You can create your own networks and assign containers to them but that is out of the scope of this lab.
 
  - **Type** the following:
 
@@ -182,7 +174,7 @@ docker run -d -it --rm --name restclient -p=18002:8002 -e DS='json' wvbirder/res
 docker network inspect bridge
 ```
 
-- This returns information about all the containers running on the default bridge. We see that our `restclient` container is assigned IP Address 172.17.0.1. You can ping that address from the Host server.
+- This returns information about all the containers running on the default bridge. We see that our `restclient` container is assigned IP Address 172.17.0.2. You can ping that address from the Host server.
 
 ![](images/100Linux/Picture100-10.png)
 
@@ -191,15 +183,16 @@ docker network inspect bridge
 - **Type** the following:
 
 ```
-ping 172.17.0.2
+ping 172.17.0.2 -c3
 ```
 
 ![](images/100Linux/Picture100-11.png)
 
-- Finally, **STOP** the `restclient` container as we will be re-using it in Lab 200 by **typing**:
+- Finally, **STOP** the `restclient` container as we will be re-provisioning it in Lab 200 by **typing**:
 
 ```
 docker stop restclient
 ```
 
-**This completes the Lab!**
+
+**You are ready to proceed to [Lab 200](Linux200.md)**

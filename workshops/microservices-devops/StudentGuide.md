@@ -23,7 +23,7 @@ This Oracle Public Cloud DevOps and Cloud Native Microservices workshop will wal
 
 ### **Step 1**: Getting your Trial Account
 
-- Click on this URL [cloud.oracle.com/tryit](http://cloud.oracle.com/tryit&intcmp=DeveloperInnovation-HOL-11NOV17), and complete all the required steps to get your free Oracle Cloud Trial Account.
+- Click on this URL [cloud.oracle.com/tryit](https://myservices.us.oraclecloud.com/mycloud/signup?language=en&sourceType=:ex:tb:::RC_PDMK171128P00097:DevOps_HOL&SC=:ex:tb:::RC_PDMK171128P00097:DevOps_HOL&pcode=PDMK171128P00097), and complete all the required steps to get your free Oracle Cloud Trial Account.
 - You must wait to receive our account before continuing to the "**Configure Oracle Cloud Identity Information**" Section.
 
 ## _Configure Oracle Cloud Identity Information_

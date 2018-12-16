@@ -128,7 +128,7 @@ The Client Image is a VM that is running on Oracle's IaaS Compute service.
 	- `mkdir /u01/app/oracle/product/12.2/opc_wallet`
 
 -	Install the Oracle Cloud Database Backup Module (previously downloaded from the [Oracle website](https://docs.oracle.com/en/cloud/paas/db-backup-cloud/csdbb/installing-oracle-database-cloud-backup-module.html#GUID-DA5B65A2-0A59-460E-8D2A-1E6E1F510A57)).  Open a terminal window and enter the following.  Be sure to replace the identity domain and password placeholder with your own:
-	- `/u01/app/oracle/product/12.2/dbhome_1/jdk/bin/java -jar /u01/OPCWorkshop/opc_install.jar -serviceName Storage -identityDomain <identity domain> -opcId cloud.admin -opcPass <cloud account password> -walletDir /u01/app/oracle/product/12.2/opc_wallet -libDir $ORACLE_HOME/lib -libPlatform linux64 -container oracle-data-storageg-1`
+	- `/u01/app/oracle/product/12.2/dbhome_1/jdk/bin/java -jar /u01/OPCWorkshop/opc_install.jar -serviceName Storage -identityDomain <Your Identity Domain> -opcId cloud.admin -opcPass <cloud account password> -walletDir /u01/app/oracle/product/12.2/opc_wallet -libDir $ORACLE_HOME/lib -libPlatform linux64 -container oracle-data-storageg-1`
 
 	![](images/100/image15.10.png)
 
@@ -148,7 +148,7 @@ configure default device type to sbt;
 CONFIGURE DEVICE TYPE SBT_TAPE PARALLELISM 5 BACKUP TYPE TO COMPRESSED BACKUPSET;
 }
 ```
-	![](images/100/image15.12.png)
+![](images/100/image15.12.png)
 
 -	List parameters
 	- `show all;`
@@ -292,7 +292,7 @@ When providing a name, please note you may have another service instance already
 	- **On-Premises Backup:** yes
 	- **Database ID:**  From the query above
 	- **Decription Method:** see below
-	- **Cloud Storage Container - note substitutions:** `https://storage.us2.oraclecloud.com/v1/Storage-<IDENTITY DOMAIN>/oracle-data-storageg-1`  
+	- **Cloud Storage Container - note substitutions:** `https://storage.us2.oraclecloud.com/v1/Storage-<Your Identity Domain>/oracle-data-storageg-1`  
 		- us2 may be em2 if you are in a EMEA data center
 		- substitute gse00011358 with your own identity domain
 	- **Username:** `<your cloud account userid>`

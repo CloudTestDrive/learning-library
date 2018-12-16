@@ -8,11 +8,6 @@
             "name": "Self-Guided",
             "description": "Individual self-guided learning",
             "imageUrl": "https://oracle.github.io/learning-library/workshops/common-content/images/common/Self-Service.png"
-          },
-          {
-            "name": "Instructor Led",
-            "description": "Instructor Led Workshop",
-            "imageUrl": "https://oracle.github.io/learning-library/workshops/common-content/images/common/Instructor Led.png"
           }
         ],
         "labs": [
@@ -24,81 +19,39 @@
                 "labels": {"version": "Self-Guided"}
             },
             {
-                "number": "20",
-                "filename": "SG-setup-manual.md",
-                "title": "Option 1: Manual Setup Steps for Self Guided Labs",
-                "description": "Step-by-step setup instructions",
-                "labels": {"version": "Self-Guided"}
-            },
-            {
                 "number": "30",
                 "filename": "SG-setup-terraform.md",
-                "title": "Option 2: Recommended - Terraform Setup Steps for Self Guided Labs",
-                "description": "Step-by-step setup instructions",
+                "title": "Setup workshop using Terraform",
+                "description": "Step-by-step setup instructions to setup the workshop using Terraform",
                 "labels": {"version": "Self-Guided"}
             },
             {
                 "number": "100",
-                "filename": "IL-100.md",
+                "filename": "SG-100.md",
                 "title": "Lab 100: Introduction",
                 "description": "Create and access a Database Cloud Instance",
                 "labels": {"version": "Self-Guided"}
             },
             {
                 "number": "200",
-                "filename": "IL-200.md",
+                "filename": "SG-200.md",
                 "title": "Lab 200: Cloud Migration",
                 "description": "Explore some common use cases for moving your data from on-premise to the cloud",
                 "labels": {"version": "Self-Guided"}
             },
             {
                 "number": "300",
-                "filename": "IL-300.md",
+                "filename": "SG-300.md",
                 "title": "Lab 300: DBCS Maintenance",
                 "description": "Perform some common DBA tasks such as setting up security access and scaling out your instance.",
                 "labels": {"version": "Self-Guided"}
             },
             {
                 "number": "400",
-                "filename": "IL-400.md",
+                "filename": "SG-400.md",
                 "title": "Lab 400: Using the Oracle Command Line Interface (CLI) to manage DBCS Instances",
                 "description": "Install and configure Oracle CLI, and perform various DBA tasks with CLI",
                 "labels": {"version": "Self-Guided"}
-            },
-            {
-                "number": "10",
-                "filename": "IL-intro.md",
-                "title": "Instructor Led Introduction",
-                "description": "Step-by-step workshop instructions",
-                "labels": {"version": "Instructor Led"}
-            },
-            {
-                "number": "100",
-                "filename": "IL-100.md",
-                "title": "Lab 100: Introduction",
-                "description": "Create and access a Database Cloud Instance",
-                "labels": {"version": "Instructor Led"}
-            },
-            {
-                "number": "200",
-                "filename": "IL-200.md",
-                "title": "Lab 200: Cloud Migration",
-                "description": "Explore some common use cases for moving your data from on-premise to the cloud",
-                "labels": {"version": "Instructor Led"}
-            },
-            {
-                "number": "300",
-                "filename": "IL-300.md",
-                "title": "Lab 300: DBCS Maintenance",
-                "description": "Perform some common DBA tasks such as setting up security access and scaling out your instance.",
-                "labels": {"version": "Instructor Led"}
-            },
-            {
-                "number": "400",
-                "filename": "IL-400.md",
-                "title": "Lab 400: Using the Oracle Command Line Interface (CLI) to manage DBCS Instances",
-                "description": "Install and configure Oracle CLI, and perform various DBA tasks with CLI",
-                "labels": {"version": "Instructor Led"}
             }
         ]
     }

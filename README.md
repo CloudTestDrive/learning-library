@@ -19,6 +19,9 @@ The following directories are contained within this repository:
 **/common** 
 - This folder contains common images and assets used by content in other folders
 
+**/oci-library** 
+- This folder contains OCI Hands-on-Labs
+
 **/templates** 
 - This folder contains templates used for Articles and Workshops
 

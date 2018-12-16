@@ -17,3 +17,4 @@
 | Database Cloud Serivces Workshop | [dbcs](https://oracle.github.io/learning-library/workshops/dbcs/) | Hands-on-labs that will give you a basic understanding of the Oracle Database Cloud Service and many of the capabilities around administration and database development.|
 | Database Cloud Serivces In-Memory Workshop | [dbcs-in-memory](./dbcs-in-memory/) | Hands-on-labs that will guide you through the basic configuration of the In-Memory column store (IM column store), as well as illustrating the benefits of its key features.|
 |Oracle Big Data Prep-BI Cloud Services Workshop | [bdpcs-bics](./bdpcs-bics/) | Hands-on-labs workshop that focuses on LOB user preparation, discovery, and reporting on spreadsheet data using the Big Data Preparation Cloud Service and BI Cloud Service|
+|Oracle Autonomous API Platform Cloud Service Tutorials | [api-platform](./api-platform/) | Hands-on tutorials that focus on the design, implementation and management of APIs|

@@ -64,43 +64,37 @@ During this lab, you will take on the **DevOps Engineer Persona**. You will prov
 
   ![](images/200/4.png)
 
-- On the OCI Console sign in page, enter the same **Username** as you did on the previous sign in page. If you are using a trial account and this is your first time logging into the OCI Console, enter the **temporary password** from your trial account welcome email. If you have already visited the OCI Console and changed your password, enter your **new password**. Otherwise, this password will be supplied by your workshop instructor.
+- If you are not prompted to sign in, skip to the next step. Otherwise, on the OCI Console sign in page, enter the same **Username** as you did on the previous sign in page. If you are using a trial account and this is your first time logging into the OCI Console, enter the **temporary password** from your trial account welcome email. If you have already visited the OCI Console and changed your password, enter your **new password**. Otherwise, this password will be supplied by your workshop instructor.
 
   ![](images/200/5.png)
 
-### **STEP 2**: Locate or Create a Compartment for your Kubernetes nodes
+### **STEP 2**: Create a Compartment for your Kubernetes nodes
 
 Compartments are used to isolate resources within your OCI tenant. User-based access policies can be applied to manage access to compute instances and other resources within a Compartment.
 
 - Click the **hamburger icon** in the upper left corner to open the navigation menu. Under the **Identity** section of the menu, click **Compartments**
 
-  ![](images/200/69.png)
+  ![](images/200/72.png)
 
-  ![](images/200/70.png)
+  ![](images/200/73.png)
 
-- Look in the compartment list for a compartment called **Demo**. Next to the OCID of the Demo compartment, click **Copy**. **Paste** this OCID into a text file or elsewhere for safe keeping. We will use it to tell Terraform where to set up our cluster in a later step. Proceed to **STEP 3**.
+- Click **Create Compartment**
 
-  ![](images/200/65.png)
+  ![](images/200/7.png)
 
-  **IMPORTANT**: _**Only if you do not have**_ a compartment called **Demo**, follow these steps to create a new compartment.
+- In the **Name** field, enter `Demo`. Enter a description of your choice. Leave the 'Compartment' field at the default value (root compartment). Click **Create Compartment**.
 
-  - If you have a **Demo** compartment already, _**SKIP TO STEP 3**_. Otherwise, Click **Create Compartment**
+  ![](images/200/8.png)
 
-    ![](images/200/7.png)
+- In a moment, your new Compartment will show up in the list. Locate it and click **Copy** in the OCID display. **Paste** this OCID into a text file or elsewhere for safe keeping. We will use it to tell Terraform where to set up our cluster in a later step.
 
-  - In the **Name** field, enter `Demo`. Enter a description of your choice. Click **Create Compartment**.
-
-    ![](images/200/8.png)
-
-  - In a moment, your new Compartment will show up in the list. Locate it and click **Copy** in the OCID display. **Paste** this OCID into a text file or elsewhere for safe keeping. We will use it to tell Terraform where to set up our cluster in a later step.
-
-    ![](images/200/9.png)
+  ![](images/200/9.png)
 
 ### **STEP 3**: Create and upload a new API key
 
 An API key is required for Terraform to authenticate to OCI in order to create compute instances for your Kubernetes master and worker nodes.
 
-- Open a terminal window and run each of the following commands, one at a time, pressing **Enter** between each one. These commands will create a new directory called `.oci`, generate a new PEM private key, generate the corresponding public key, and copy the public key to the clipboard.
+- Open a terminal window and run each of the following commands, one at a time, pressing **Enter** between each one. These commands will create a new directory called `.oci`, generate a new PEM private key, generate the corresponding public key and print it to the terminal.
 
 
 ```bash
@@ -114,9 +108,9 @@ cat ~/.oci/oci_api_key_public.pem
 
   ![](images/200/11.png)
 
-- In your browser window showing the OCI Console, click the **hamburger icon** to open the navigation menu. Under the **Identity** section, click **Users**. Find the user called **api.user**, or for a trial account, find **your username** in the list and hover over the **three dots** menu at the far right of the row, then click **View User Details**.
+- In your browser window showing the OCI Console, click the **hamburger icon** to open the navigation menu. Under the **Identity** section, click **Users**. Find **your username** in the list and hover over the **three dots** menu at the far right of the row, then click **View User Details**.
 
-  ![](images/200/71.png)
+  ![](images/200/74.png)
 
   ![](images/200/56.png)
 
@@ -157,41 +151,8 @@ cd ~/terraform
 ```bash
 export PATH=$PATH:`pwd`
 ```
-### **STEP 5**: Download the OCI Terraform Provider
 
-ATTENTION!
-
-As of V3 of the Terraform provider, you do not need to manually install the provider yourself.  Instead, it will be provisioned automatically through the "terraform init" command.
-
-
-
-**Below steps are only shown for people still running older versions.  If you did a fresh install of the latest version of terraform, you can skipp below instructions and move to Step 6**
-
-
-
-
-
-
-
-- Download the **OCI Terraform Provider** from the [GitHub release page](https://github.com/oracle/terraform-provider-oci/releases/latest). Select the package for your operating system. **Note:** for **Mac** use a **darwin** version of the tar file.
-
-  ![](images/200/59.png)
-
-- Click on the **Save File** option if you are prompted and then click on **OK** to download the file.
-
-  ![](images/200/59.1.png)
-
-- Run the following commands in a **terminal window** to extract the provider binary into the Terraform plugins folder. _Note:
-  replace_ the `linux_*.tar.gz` with the filename of the file you downloaded:
-
-  ```bash
-  cd ~/Downloads
-  mkdir -p ~/.terraform.d/plugins && cat linux_*.tar.gz | tar -zxvf - -C ~/.terraform.d/plugins/
-  ```
-
-- Terraform will look in the `plugins` directory for the OCI provider when it is specified by an installer, as we will see in the next step.
-
-### **STEP 6**: Download and Configure the OCI Terraform Kubernetes Installer
+### **STEP 5**: Download and Configure the OCI Terraform Kubernetes Installer
 
 - _Install kubectl_. Terraform requires `kubectl` - the Kubernetes command line interface, to interact with Kubernetes from your local machine. You can install it by following the instructions for **Installing kubcectl binary via curl** for either mac or linux **[Kubernetes docs](https://kubernetes.io/docs/tasks/tools/install-kubectl/)**.
 
@@ -232,52 +193,74 @@ As of V3 of the Terraform provider, you do not need to manually install the prov
   gedit terraform.tfvars
   ```
 
-- You should still have a browser tab open to your **User Details** page in the OCI Console. If not, you can get to the User Details by selecting **Identity** then **Users** from the top menu of the Console. Then click on your **User's Name**.
-
-- While editing the file, you will first remove the **#** comment character and replace in the values in the terraform.tfvars file on lines **2, 4, 6, and 7** using the examples in the next two images below. **NOTE**: The **region** parameter may not already be present in your tfvars file. If it is not there, add it on a new line after the user_ocid parameter on line 6.
+- You should still have a browser tab open to your **User Details** page in the OCI Console. You will first remove the **#** comment character and replace in the values  in the terraform.tfvars file on lines **2, 4, 6, and 7**. **NOTE**: The **region** parameter may not already be present in your tfvars file. If it is not there, add it on a new line after the user_ocid parameter on line 6.
 
   ![](images/200/57.1.png)
 
 - Setting these variables can be a little tricky the first time you attempt it. [Checkout this video if you want to watch the steps performed. ](https://videohub.oracle.com/media/Lab+200A+Terraform+.tfvars+OCI+Configuration/0_vkxcw719)
 
+- You will replace line **3** with the Tenancy OCID from the "Tenacy Details" page, which you can find under the administration menu:
 
-- You will replace lines **2, 4, 6, and 7** with the values from the OCI Console, referring to the following screenshot for where to find them.
+  ![](images/200/17.1.png)
+
+- The Tenancy OCID can be found, and copied, in the center of the page, shown below:
+
+  ![](images/200/17.2.png)
+
+- You will replace lines **5, 7, and 8** with the values from the OCI Console, referring to the following screenshot for where to find them.
 
   ![](images/200/17.png)
 
-- As an exmaple, Your terraform.tfvars file should now appear similar to the image shown below:
+- As an example, Your terraform.tfvars file should now appear similar to the image shown below:
 
   ![](images/200/57.2.png)
 
-- Now follow the same process of removing the comment character **#**, and fill in the OCI Compartment ID on **line 3**. Paste the value that you saved to a text file after locating or creating the Demo **compartment** in the OCI Console. If you have lost it, you can retrieve it from the OCI Console compartment list (refer to **STEP 2**).
+- Now follow the same process of removing the comment character **#**, and fill in the OCI Compartment ID on **line 4**. Paste the value that you saved to a text file after locating or creating the Demo **compartment** in the OCI Console. If you have lost it, you can retrieve it from the OCI Console compartment list (refer to **STEP 2**).
 
   ```
   compartment_ocid = "Compartment OCID"
   ```
 
-- The last piece of information we need to provide about your OCI tenant is the private key corresponding to the public API key you uploaded to the OCI console previously. Provide the path the the private key file on **line 5**. Note that _your path may differ_ from the example given below. Your public key was created as a first task in Step 3, and the location of your oci_api_key.pem file can be determined from how you completed those instructions.
+- The last piece of information we need to provide about your OCI tenant is the private key corresponding to the public API key you uploaded to the OCI console previously. Provide the path and the private key file on **line 6** using the path below:
 
   ```
-  private_key_path = "/Users/your-local-username/.oci/oci_api_key.pem"
+  private_key_path = "/home/oracle/.oci/oci_api_key.pem"
   ```
 
-- The rest of the terraform.tfvars file controls the parameters used when creating your Kubernetes cluster. You can control how many OCPUs each node receives, whether nodes should be virtual machines or bare metal instances, how many availability domains to use, and more. We will modify three of the lines in the remainder of the file.
+- The rest of the terraform.tfvars file controls the parameters used when creating your Kubernetes cluster. You can control how many OCPUs each node receives, whether nodes should be virtual machines or bare metal instances, how many availability domains to use, and more. We will modify five of the lines in the remainder of the file.
 
-- First, we will specify shapes for our worker and master nodes base on our account limits/capacity. On **lines 15 and 16**, un-comment the **k8sMasterShape** and **k8sWorkerShape** parameters, and set the values to **VM.Standard2.1** and **VM.Standard1.2**:
+- First, we will specify shapes for our worker and master nodes base on our account limits/capacity. On **lines 16, 17 and 18**, un-comment the **etcdShape**, **k8sMasterShape** and **k8sWorkerShape** parameters, and set the values to **VM.Standard2.1**:
 
   ```
+  etcdShape = "VM.Standard2.1"
   k8sMasterShape = "VM.Standard2.1"
-  k8sWorkerShape = "VM.Standard1.2"
+  k8sWorkerShape = "VM.Standard2.1"
   ```
 
-- Next, we will specify the type of load balancers we want for the master and etcd VMs. We will also select the following settings based on our Account's capacity. Alter **lines 30 and 31** to read:
+- Now we can specify which Availability Domains we want each of the components to be provisioned in. We will place the Kubernetes Master in AD1, the etcd node in AD2, and the Kubernetes Worker in AD3. To accomplish this, uncomment the three lines from **line 20 through 22** and adjust the quantities to the following:
+
+  ```
+  etcdAd1Count = "0"
+  etcdAd2Count = "1"
+  etcdAd3Count = "0"
+  ```
+
+- We will follow a similar pattern for the worker nodes. Uncomment **line 28 through 30** and adjust the values to the following:
+
+  ```
+  k8sWorkerAd1Count = "0"
+  k8sWorkerAd2Count = "0"
+  k8sWorkerAd3Count = "1"
+  ```
+
+- Next, we will specify the type of load balancers we want for the master and etcd VMs. We will also select the following settings based on our Account's capacity. Alter **lines 32 and 33** to read:
 
   ```
   etcdLBShape = "400Mbps"
   k8sMasterLBShape = "400Mbps"
   ```
 
-- The last change we will make is to open up the allowed Kubernetes master inbound IP address range, so that we can access our cluster from the internet. On **line 38**, remove the pound sign at the beginning of the line to uncomment it.
+- The next change we will make is to open up the allowed Kubernetes master inbound IP address range, so that we can access our cluster from the internet. On **line 40**, remove the pound sign at the beginning of the line to uncomment it.
 
   ```
   master_https_ingress = "0.0.0.0/0"
@@ -285,11 +268,26 @@ As of V3 of the Terraform provider, you do not need to manually install the prov
 
   **NOTE**: The 0.0.0.0/0 value means that any IP address can access your cluster. A better security practice would be to determine your externally-facing IP address and restrict access to only that address. If you'd like, you can find out your IP address by running `curl ifconfig.co` in a terminal window, and place that address into the `master_https_ingress` parameter (e.g. `master_https_ingress = "11.12.13.14/32"`). Note that if you need remote assistance with the workshop, you may need to open this back up to 0.0.0.0/0 to allow access to your cluster.
 
+
+- The last change we will make is to open up the NodePort port range on the master node. **Add a new line** to the file that reads:
+
+  ```
+  master_nodeport_ingress = "0.0.0.0/0"
+  ```
+
 - **Double check** to ensure you removed the **#** character from in front of all the entries you modified
 
-### **STEP 7**: Provision Kubernetes on OCI
+### **STEP 6**: Provision Kubernetes on OCI
 
-- Now we are ready to have Terraform provision our Kubernetes cluster. **Save and close** your terraform.tfvars file. In your open **terminal window**, run the following command to have Terraform evaluate the various network and compute infrastructure that we are asking to be provisioned.
+- Now we are ready to have Terraform provision our Kubernetes cluster. **Save and close** your terraform.tfvars file. In your open **terminal window**, run the following commands to have Terraform evaluate the various network and compute infrastructure that we are asking to be provisioned.
+
+- Specify the correct OS base image for your Kubernetes virtual machines by running:
+
+  ```bash
+  sed -i.bak 's/Oracle-Linux-7.5-2018.08.14-0/Oracle-Linux-7.6-2018.11.19-0/' variables.tf
+  ```
+
+- Preview the changes that Terraform is going to make to your infrastructure by running:
 
   ```bash
   terraform plan
@@ -322,19 +320,25 @@ As of V3 of the Terraform provider, you do not need to manually install the prov
   while true; do kubectl get nodes; sleep 10; done
   ```
 
-- For the first few minutes, it is normal to see connection errors and server errors returned while your infrastructure is starting up. When you see that both the master and worker nodes have a 'STATUS' of **Ready**, press **Control-C** to stop the monitoring loop.
+- For the first few minutes, it is normal to see connection errors and server errors returned while your infrastructure is starting up. When you see that the node has a 'STATUS' of **Ready**, press **Control-C** to stop the monitoring loop.
 
   ![](images/200/68.png)
 
   **TROUBLESHOOTING**:
 
-  >If more than 15 minutes have passed and you do not have both nodes 'Ready', there may be a problem with your infrastructure. Navigate to the OCI console in your browser to check.
+  >If more than 15 minutes have passed and you do not have a node 'Ready', there may be a problem with your infrastructure. Navigate to the OCI console in your browser to check.
 
   >First, click the hamburger icon to open the navigation menu. Then, under the Networking section, click **Load Balancers** to view the status of your load balancers. Look at the colored hexagons on the left side of the table. Both load balancers should have green hexagons and have a status of 'ACTIVE'. If either one has a red hexagon and a status of 'FAILED', you will need to reprovision your infrastructure. Note that this is NOT the 'Health' indicator on the right side of the table, which will fluctuate between states for the first 20-30 minutes after provisioning.
 
   >Second, click on **Compute** from the navigation menu. You should see three compute instances with green 'RUNNING' status indicators. If any are in the red **FAILED** state or the yellow **PROVISIONING** state after 15 minutes, you will need to reprovision your infrastructure.
 
   >**To reprovision your infrastructure**, first run `terraform destroy` from your terminal window, then run `terraform apply` again. You will need to type `yes` when prompted to confirm each command. After the provisioning, re-run the monitoring loop to see the status of your installation: `while true; do kubectl get nodes; sleep 10; done`
+
+- Run the following command to allow pods to run on the master node:
+
+  ```bash
+  kubectl taint nodes 0 node-role.kubernetes.io/master:NoSchedule-
+  ```
 
 - Now that the nodes are ready, you can start the Kubernetes proxy server, which will let you view the cluster dashboard at a localhost URL.
 
@@ -352,14 +356,14 @@ As of V3 of the Terraform provider, you do not need to manually install the prov
 
 *Remark:* In case your kubectl commands time out, you might have to add an extra rule to your OCI network configuration.  To do this, execute the following steps:
 - navigate to your VCN configuration ("Networking", "Virtual CLoud Networks", select your VCN "kubernetes",)
-- in the list of subnets find the one named "PublicK8SMasterSubnetAD1", and click on the associated security list called "k8sMaster_security_list". 
+- in the list of subnets find the one named "PublicK8SMasterSubnetAD1", and click on the associated security list called "k8sMaster_security_list".
 - Here you must click on the "Edit all rulles" button, scroll to the bottom and add a new Ingress rule using the "+ Another Ingress Rule" button.
 - Leave the "Stateless" flag unselected, enter "0.0.0.0/0" in the source SIDR, and select "All Protocols".  
 - Now scroll to the top to use the "Save" button.
 
 ## Configure and Run Wercker Deployment Pipelines
 
-### **STEP 8**: Define Kubernetes Deployment Specification
+### **STEP 7**: Define Kubernetes Deployment Specification
 
 - From a browser, navigate to your forked twitter-feed repository on GitHub. If you've closed the tab, you can get back by going to [GitHub](https://github.com/), scrolling down until you see the **Your repositories** box on the right side of the page, and clicking the **twitter-feed** link.
 
@@ -433,7 +437,7 @@ spec:
 
 - Since you've committed to the repository, Wercker will trigger another execution of your workflow. We haven't defined the deployment pipelines yet, so this will just result in a new entry in Wercker's Runs tab and a new image pushed to the container registry. You don't need to do anything with those; you can move on to the next step.
 
-### **STEP 9**: Define Wercker Deployment Pipelines
+### **STEP 8**: Define Wercker Deployment Pipelines
 
 - Click the file **wercker.yml** and then click the **pencil** button to begin editing the file.
 
@@ -468,13 +472,13 @@ deploy-to-cluster:
         command: apply -f kubernetes.yml
 ```
 
-- At the bottom of the page, click **Commit new file**
+- At the bottom of the page, click **Commit changes**.
 
-  ![](images/200/29.png)
+  ![](images/100/29.png)
 
 - Since you've committed to the repository again, Wercker will once again trigger an execution of your workflow. We still haven't configured the deployment pipelines in Wercker yet, so we'll still end up with a new Run and a new image, but not a deployment to Kubernetes.
 
-### **STEP 10**: Set up deployment pipelines in Wercker
+### **STEP 9**: Set up deployment pipelines in Wercker
 
 - Open **[Wercker](https://app.wercker.com)** in a new tab or browser window, or switch to it if you already have it open. In the top navigation bar, click **Pipelines**, then click on your **twitter-feed** application.
 
@@ -500,7 +504,7 @@ deploy-to-cluster:
 
 - Now we've got our workflow updated with our deployment pipelines, but there's one more thing we need to do before we can actually deploy. We need to set two environment variables that tell Wercker the address of our Kubernetes master and provide an authentication token for Wercker to issue commands to Kubernetes.
 
-### **STEP 11**: Set up environment variables in Wercker
+### **STEP 10**: Set up environment variables in Wercker
 
 - Our first step is to set our cluster's authentication token as a Wercker environment variable. In your **terminal window**, run the following command to output the token, then **select it and copy it** to your clipboard:
 
@@ -524,7 +528,7 @@ deploy-to-cluster:
 
 - Now we're ready to try out our workflow from start to finish. We could do that by making another commit on GitHub, since Wercker is monitoring our source code. We can also trigger a workflow execution right from Wercker. We'll see how in the next step.
 
-### **STEP 12**: Trigger a retry of the pipeline
+### **STEP 11**: Trigger a retry of the pipeline
 
 - On your Wercker application page in your browser, click the **Runs** tab. Your most recent run should have successful build and push-release pipelines. Click the **push-release** pipeline.
 
@@ -542,7 +546,7 @@ deploy-to-cluster:
 
   ![](images/200/42.png)
 
-### **STEP 13**: Validate deployment
+### **STEP 12**: Validate deployment
 
 - In a terminal window, start the **kubectl proxy** using the following command. Your `KUBECONFIG` environment variable should still be set from a previous step. If not, reset it.
 
@@ -574,7 +578,7 @@ deploy-to-cluster:
 
 ## Deploy and Test the Product Catalog Application
 
-### **STEP 14**: Download the Product Catalog Kubernetes YAML file
+### **STEP 13**: Download the Product Catalog Kubernetes YAML file
 
 - From a browser, navigate to your forked twitter-feed repository on GitHub. If you've closed the tab, you can get back by going to [GitHub](https://github.com/), scrolling down until you see the **Your repositories** box on the right side of the page, and clicking the **twitter-feed** link.
 
@@ -590,7 +594,7 @@ deploy-to-cluster:
 
 **NOTE**: This YAML file contains the configuration for a Kubernetes deployment and service, much like the configuration for our twitter feed microservice. In a normal development environment, the product catalog application would be managed by Wercker as well, so that builds and deploys would be automated. In this workshop, however, you will perform a one-off deployment of a pre-built Docker image containing the product catalog application from within the Kubernetes dashboard.
 
-### **STEP 15**: Deploy and test the Product Catalog using the Kubernetes dashboard
+### **STEP 14**: Deploy and test the Product Catalog using the Kubernetes dashboard
 
 - Switch back to your **Kubernetes dashboard** browser tab. If you have closed it, navigate to the Kubernetes dashboard at [**Kubernetes dashboard**](http://localhost:8001/api/v1/namespaces/kube-system/services/http:kubernetes-dashboard:/proxy/)
 
@@ -602,17 +606,19 @@ deploy-to-cluster:
 
   ![](images/200/50.png)
 
+  **NOTE:** You could alternatively deploy this application using the command line interface, with `kubectl apply -f ~/Downloads/alpha-office-product-catalog.kubernetes.yml`
+
 - In the left side navigation menu, click **Overview**. You should see two new product-catalog-app pods being created and soon change state to Running.
 
   ![](images/200/51.png)
 
-- Instead of a cluster-internal IP address, the product-catalog-service will be exposed to the internet via a load balancer. The load balancer will take a few minutes to be instantiated and configured. Let's check on its status--click **Services** from the left side menu, then click on the **product-catalog-service**.
+- Instead of a cluster-internal IP address, the product-catalog-service will be exposed to the internet via a **Node Port**. The node where our pod is running will expose a port for this service on its public IP address. We can craft a link to the product catalog application by running the following in a terminal window (it's OK if you stop `kubectl proxy` to run this command, just start it back up again when you need it).
 
-  ![](images/200/52.png)
+  ```bash
+  echo http://$(kubectl get nodes -o jsonpath='{ $.items[*].status.addresses[?(@.type=="ExternalIP")].address }'):30000
+  ```
 
-- On the service detail page, you will see a field called **External endpoints**. Once the load balancer has finished provisioning, the External endpoints field will be populated with a link to the product catalog application. If the link is not shown yet, wait a few minutes, refresh your browser, and check again. Once the link is displayed, **click it** to launch the site in a new tab.
-
-  ![](images/200/53.png)
+- **Copy** the URL generated by the previous command and **paste** it into the location bar of a new browser tab.
 
 - You should see the product catalog site load successfully, validating that our new Kubernetes deployment and service were created correctly. Let's test the twitter feed functionality of the catalog. Click the first product, **Crayola New Markers**. The product's twitter feed should be displayed.
 
@@ -624,4 +630,4 @@ deploy-to-cluster:
 
 - Some tweets are indeed displayed, but they aren't relevant to this product. It looks like there is a bug in our twitter feed microservice! Continue on to the next lab to explore how to make bug fixes and updates to our microservice.
 
-**You are now ready to move to the next lab.**
+**You are now ready to move to the next lab, [Lab 300](LabGuide300.md)**

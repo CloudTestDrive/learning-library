@@ -1,63 +1,29 @@
-# Workshop Introduction
-
-## How to Prepare for This Workshop
-
-- To log issues and view the Lab Guide source, go to the [github oracle](https://github.com/oracle/learning-library/issues/new) repository.
-
-- The Labguides are best viewed using the Workshop's [GitHub Pages Website URL](https://oracle.github.io/learning-library/workshops/dbcs-dba-oci/) 
-
-- Once you are viewing the Workshop's GitHub Pages website, you can see a list of Lab Guides at any time by clicking on the **Menu Icon**
-
-![](images/WorkshopMenu.png)  
-
-## Database Cloud Services Workshop for Oracle Compute Infrastructure (OCI)
+# Database Cloud Services Workshop for Oracle Compute Infrastructure (OCI)
 
 Welcome to the Oracle Database Cloud Service Workshop. This particular version is based on Oracle's 'OCI' services, versus Oracle 'Classic' services. These labs will give you a basic understanding of the Oracle Database Cloud Service and many of the capabilities around administration and database management. Lab 100 will introduce you to DBCS and show you how to create a Cloud Database. Lab 200 will cover various data migration use cases, including pluggable database migration, tablespace migration, schema migration, and ad-hoc table copying between databases. Lab 300 covers some common Database management activities. Lab 400 show you how to use the Oracle Command Line Interface (CLI) commands to perform various tasks.  This workshop was built on and for version 12.2 of the database, but will also work with 18c with minor changes.  See the 18c_updates document in the drop down menu.
 
-## Workshop Details
+## Acquire an Oracle Cloud Trial or Workshop Account (after this workshop)
 
-**Reference the following Lab Guides by opening their Documentation Files:**
+Please click on the [Free Oracle Cloud Promotion](https://myservices.us.oraclecloud.com/mycloud/signup?language=en&sourceType=:ex:tb:::RC_NAMK180723P00029:RedshiftADWC_HOL&SC=:ex:tb:::RC_NAMK180723P00029:RedshiftADWC_HOL&pcode=NAMK180723P00029) link to complete all the required steps to get your free Oracle Cloud Trial Account. When you complete the registration process you'll receive a $300 credit and up to 3500 hours of free Oracle Cloud usage. You'll have 1000s of hours left over after the labs to continue to explore the Oracle Cloud.  Soon after requesting your trial you will receive the following email. You will not be able to start Lab 100 until you have received it.
 
-## Lab 100: Introduction and Database Creation
+![](images/trial.png)
 
-**Documentation**: [IL-100.md](IL-100.md)
+## Navigate to Terraform Setup Steps for Self Guided Labs
 
-### Objectives
+- Before you can proceed with the labs you must run setup steps.  There are two options - manual and Terraform.  The Terraform setup is recommended.  These steps will take approximately 60-90 minutes.  
 
--	Familiarize yourself with the Oracle Cloud Infrastructure.
--	Create a Virtual Cloud Network (VCN).
--	Create Database Cloud Service.
--   SSH configuration.
--   Explore VM and consoles.
+![](images/WorkshopMenu.png)
 
-## Lab 200: Data Migration
+  ![](images/setup.png) 
 
-**Documentation**: [IL-200.md](IL-200.md)
+## Navigate to Lab 100
 
-### Objectives
+- Once the setup is complete you can move on to lab 100 by clicking on the Menu Icon in the upper left corner of the browser window. You're now ready to continue with Lab 100.
 
--   Hot clone a pluggable database from on-premise to the Cloud.
--   Migrate a schema using Oracle Data Pump.
--   Migrate data using a Transportable Tablespace.
--   Copy data using Database Links.
+![](images/WorkshopMenu.png)
 
-## Lab 300: Common DBA Tasks
+![](images/lab100.png)  
 
-**Documentation**: [IL-300.md](IL-300.md)
 
-### Objectives
 
--   Maintain security access.
--   Scale up an instance.
--   Add a SSH Key.
--   Recover a dropped table.
 
-## Lab 400:  Oracle Command Line Interface (CLI)
-
-**Documentation**: [IL-400.md](IL-400.md)
-
-### Objectives
-
-- Install Oracle CLI
-- Use OCI commands to request information about DBCS related configuration and services.
-- Create services with oci commands.

@@ -5,104 +5,47 @@
         "interactive":"https://launch.oracle.com/?docker-workshop",
         "versions": [
             {
-              "name": "Play-with-Docker",
-              "description": "An on-line interface to begin learning Docker",
-              "imageUrl": "https://oracle.github.io/learning-library/workshops/docker/images/docker.png"
-            },
-            {
-              "name": "Mac",
-              "description": "Use your MAC to develop and deploy with Docker and perform this workshop",
-              "imageUrl": "https://oracle.github.io/learning-library/workshops/common-content/images/common/mac.png"
-            },
-            {
-              "name": "Linux",
+              "name": "Linux Trial Account",
               "description": "Use Linux to develop and deploy with Docker and perform this workshop",
               "imageUrl": "https://oracle.github.io/learning-library/workshops/common-content/images/common/linux.png"
-            },
-            {
-              "name": "Windows",
-              "description": "Use Windows to develop and deploy with Docker and perform this workshop",
-              "imageUrl": "https://oracle.github.io/learning-library/workshops/common-content/images/common/windows.png"
             }
         ],
         "labs": [
             {
                 "number": "0",
-                "filename": "README.md",
-                "title": "README First",
-                "description": "Overview and Links to Setup",
-                "labels": {"version": "Play-with-Docker"}
+                "filename": "Intro.md",
+                "title": "Introduction",
+                "description": "Obtain an Oracle Cloud Trial Account",
+                "labels": {"version": "Linux Trial Account"}
             },
             {
-                "number": "100",
-                "filename": "Pwd100.md",
-                "title": "PWD Lab 100: Docker Introduction",
-                "description": "Concepts, commands and simple deployment",
-                "labels": {"version": "Play-with-Docker"}
+                "number": "1",
+                "filename": "Intro-virtual.md",
+                "title": "VIRTUAL WORKSHOP VERSION ONLY",
+                "description": "Obtain an Oracle Cloud Trial Account",
+                "labels": {"version": "Linux Trial Account"}
             },
             {
-                "number": "0",
-                "filename": "READMEMac.md",
-                "title": "README First",
-                "description": "Overview and Links to Setup",
-                "labels": {"version": "Mac"}
-            },
-            {
-                "number": "100",
-                "filename": "Mac100.md",
-                "title": "Mac Lab 100: Docker Introduction",
-                "description": "Concepts, commands and simple deployment",
-                "labels": {"version": "Mac"}
-            },
-            {
-                "number": "200",
-                "filename": "Mac200.md",
-                "title": "Mac Lab 200: AlphaOffice Deployment",
-                "description": "Application deployment using a database",
-                "labels": {"version": "Mac"}
-            },
-            {
-                "number": "0",
-                "filename": "READMELinux.md",
-                "title": "README First",
-                "description": "Over and Links to Setup",
-                "labels": {"version": "Linux"}
+                "number": "050",
+                "filename": "Linux050.md",
+                "title": "Lab 050: Cloud Infrastructure Configuration",
+                "description": "Setting up the Infrastructure to support a Compute Instance running Docker",
+                "labels": {"version": "Linux Trial Account"}
             },
             {
                 "number": "100",
                 "filename": "Linux100.md",
-                "title": "Linux Lab 100: Docker Introduction",
-                "description": "Concepts, commands and simple deployment",
-                "labels": {"version": "Linux"}
+                "title": "Lab 100: Docker Introduction",
+                "description": "Concepts, commands and a simple deployment",
+                "labels": {"version": "Linux Trial Account"}
             },
             {
                 "number": "200",
                 "filename": "Linux200.md",
                 "title": "Linux Lab 200: AlphaOffice Deployment",
-                "description": "Application deployment using a database",
-                "labels": {"version": "Linux"}
-            },
-            {
-                "number": "0",
-                "filename": "READMEWin.md",
-                "title": "README First",
-                "description": "Overview and links to Setup",
-                "labels": {"version": "Windows"}
-            },
-            {
-                "number": "100",
-                "filename": "Win100.md",
-                "title": "Windows Lab 100: Docker Introduction",
-                "description": "Concepts, commands and simple deployment",
-                "labels": {"version": "Windows"}
-            },
-            {
-                "number": "200",
-                "filename": "Win200.md",
-                "title": "Windows Lab 200: AlphaOffice Deployment",
-                "description": "Application deployment using a database",
-                "labels": {"version": "Windows"}
-            }            
+                "description": "Multi-container Application deployment using a Database",
+                "labels": {"version": "Linux Trial Account"}
+            }
         ]
     }
 }

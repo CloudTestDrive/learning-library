@@ -17,12 +17,12 @@ Create ChatBots with Intents, Entities, Utterances and Flow
 
 ### **STEP 1**: Create a simple Cafeteria Assistance ChatBot
 
-Log in to your OMCe and then, select Bots to create ChatBot.
+Log in to your AMCe and then, select Bots to create ChatBot.
 ![](images/100/Picture100-23.png)
 
 And, then click the **New Bot** button
 
-***DISCLAIMER*** “The MCSe trail environment GUI might be little different than our test environment”
+
 
 ![D:\\Workshop\_Bot\\image1.PNG](images/100/image3.png)
 

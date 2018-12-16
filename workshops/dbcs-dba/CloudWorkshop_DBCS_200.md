@@ -160,7 +160,7 @@ This lab supports the following use cases:
 
 	**Role**:				`SYSDBA`
 
-	**Service Name**: 		`ORCL.<Your ID Domain>.oraclecloud.internal`
+	**Service Name**: 		`ORCL.<Your Identity Domain>.oraclecloud.internal`
 	
 	![](images/200/image25.png)
 
@@ -318,7 +318,7 @@ This lab supports the following use cases:
 
 	**ConnectionType**:		`SSH`
 
-	**Service Name**:		`alphaclone.<Your ID Domain>.oraclecloud.internal`
+	**Service Name**:		`alphaclone.<Your Identity Domain>.oraclecloud.internal`
 	
 	
 	![](images/200/image55.png)
@@ -357,14 +357,14 @@ This lab supports the following use cases:
 ### **STEP 11**:  Copy the export Data Pump file to the server
 
 -   Use the following secure copy (**scp**) command to transfer the Data Pump export to the DBCS server using your Database Service's Public IP address identified in Lab 100:
-	- `scp -i /u01/OPCWorkshop/ci_opc_keys /home/oracle/alpha.dmp oracle@{your public IP}:.`
+	- `scp -i /u01/OPCWorkshop/ci_opc_keys /home/oracle/alpha.dmp oracle@<Alpha01A-DBCS IP>:.`
 
 	![](images/200/image60.png)
 
 ### **STEP 12**:  Create a new schema to hold a copy of the data
 
 -	Open a new terminal window (or use the current one) and enter the following commands that will SSH to the Alpha01A-DBCS instance, create an Oracle directory, and import the data.
-	- `ssh -i /u01/OPCWorkshop/ci_opc_keys oracle@{your public IP}` -- log into your remote DBCS instance
+	- `ssh -i /u01/OPCWorkshop/ci_opc_keys oracle@<Alpha01A-DBCS IP>` -- log into your remote DBCS instance
 	- `sqlplus system/Alpha2018_@pdb1;` -- log into system in the alphapdb
 	- `create user alpha2 identified by Alpha2018_;` -- create schema alpha2 (alpha already has the data from the previous lab)
 	- `grant dba to alpha2;`
@@ -407,9 +407,9 @@ We will be exporting a GG (GoldenGate) tablespace, since there already is a user
 
 ### **STEP 15**:  Copy the datafiles to the target DBCS instance
 
--	In the terminal window enter the following:
-	- `scp -i /u01/OPCWorkshop/ci_opc_keys /home/oracle/ggtbs.dmp oracle@<DBCS IP>:.` -- metadata
-	- `scp -i /u01/OPCWorkshop/ci_opc_keys /u01/app/oracle/oradata/orcl/pdb1/gg.dbf oracle@<DBCS IP>:.` -- datafiles
+-	In the terminal window enter the following.  The first is the metadata, and the second the datafiles:
+	- `scp -i /u01/OPCWorkshop/ci_opc_keys /home/oracle/ggtbs.dmp oracle@<<Alpha01A-DBCS IP>:.`
+	- `scp -i /u01/OPCWorkshop/ci_opc_keys /u01/app/oracle/oradata/orcl/pdb1/gg.dbf oracle@<Alpha01A-DBCS IP>:.`
 
 	![](images/200/image66.png)
 
@@ -418,7 +418,7 @@ We will be exporting a GG (GoldenGate) tablespace, since there already is a user
 We will be importing the data into the pdb1 instance.  First we'll need to drop the users tablespace since it already exists, then create an Oracle tmp directory, and then run the import.
 
 -	SSH to the target DBCS instance, log in, and create euro user (must already exist in the target).
-	- `ssh -i /u01/OPCWorkshop/ci_opc_keys oracle@<DBCS IP>`
+	- `ssh -i /u01/OPCWorkshop/ci_opc_keys oracle@<Alpha01A-DBCS IP>`
 	- `sqlplus system/Alpha2018_@pdb1`
 	- `create user euro identified by Alpha2018_;`
 	- `grant dba to euro;` 
@@ -467,7 +467,7 @@ Occasionally you just want to copy one or more tables from one database to anoth
 -	Log into SQLPlus in and create the database link.  Be sure to update this command with your Identity Domain.
 	- `source dbenv.sh`
 	- `sqlplus alpha/Alpha2018_@alphapdb;`
-	- `create database link alpha_dbcs.oracledemo.com connect to alpha2 identified by Alpha2018_ using '(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1530))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=pdb1.<IDENTITY DOMAIN>.oraclecloud.internal)))';`
+	- `create database link alpha_dbcs.oracledemo.com connect to alpha2 identified by Alpha2018_ using '(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1530))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=pdb1.<Your Identity Domain>.oraclecloud.internal)))';`
 	- `select sysdate from dual@alpha_dbcs.oracledemo.com;`
 
 	![](images/200/image73.png)

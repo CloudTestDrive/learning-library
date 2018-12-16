@@ -4,23 +4,6 @@
         "description": "This Oracle Public Cloud DevOps and Cloud Native Microservices workshop will walk you through the Software Development Lifecycle (SDLC) for a Cloud Native project, during which you will create and use several Microservices. During this workshop you will take on the role of 4 personae. As the first persona - the Project Manager - you will create the projects, add tasks and features to be worked on, and assign tasks to developers.  The Project Manager will then start the initial sprint. The Java Developer persona will develop a new twitter feed microservice that will allow for retrieval and filtering of twitter data. The Full Stack Developer persona will dvelop a new database microservie that allows access to the product catalog data. The JavaScript Developer persona will make enhancements to the Product Catalog UI that will display the twitter data related to a select catalog item.  During the workshop, you will get exposure to Oracle Developer Cloud Service and Oracle Application Container Cloud Service.",
         "theme": "default",
         "interactive":"https://launch.oracle.com/?microservices-devops",
-        "versions": [
-            {
-                "name": "Self-Service",
-                "description": "Using a Trial Environment - Both Self-guided or Instructor Lead",
-                "imageUrl": "images/Self-Service.png"
-            },  
-            {
-              "name": "Instructor Led",
-              "description": "An in-person workshop using an Instructor Provided Cloud Environment",
-              "imageUrl": "images/InstructorLed.png"
-            },  
-            {
-              "name": "Oracle Events",
-              "description": "An in-person workshop tailored for Cloud Trial Accounts at an Oracle Event (e.g. Code/Virtual).",
-              "imageUrl": "images/OracleCode.png"
-            }
-          ],
         "labs": [
             {
                 "number": "10",
@@ -75,116 +58,7 @@
                 "labels": {
                     "version": "Self-Service"
                 }
-            },
-            {
-                "number": "0",
-                "filename": "InstructorOverview.md",
-                "title": "Workshop Overview",
-                "description": "Step-by-step workshop instructions",
-                "labels": {
-                    "version": "Instructor Led"
-                }
-            },
-            {
-                "number": "100",
-                "filename": "CloudNative100.md",
-                "title": "Lab 100: Agile Project Management",
-                "description": "Use Developer Cloud Service to create issues, tasks, and sprints",
-                "labels": {
-                    "version": "Instructor Led"
-                }
-            },
-            {
-                "number": "200",
-                "filename": "CloudNative200.md",
-                "title": "Lab 200: Continuous Delivery of Java Microservices",
-                "description": "Access Developer Cloud Service, Import external GIT Repository, and Build and Deploy a project using Developer Cloud Service and Oracle Application Container Cloud Service.",
-                "labels": {
-                    "version": "Instructor Led"
-                }
-            },
-            {
-                "number": "300",
-                "filename": "CloudNative300.md",
-                "title": "Lab 300: Continuous Delivery of Database Microservices",
-                "description": "Access Developer Cloud Service, Import external GIT Repository, and Build and Deploy a project using Developer Cloud Service and Oracle Application Container Cloud Service.",
-                "labels": {
-                    "version": "Instructor Led"
-                }
-            },
-            {
-                "number": "400",
-                "filename": "CloudNative400.md",
-                "title": "Lab 400: Cloud Native Rapid Javascript Development with node.js",
-                "description": "Access Developer Cloud Service, Import Code from external Git Repository, then Build and Deploy project using Developer Cloud Service and Oracle Application Container Cloud Service",
-                "labels": {
-                    "version": "Instructor Led"
-                }
-            },
-            {
-                "number": "500",
-                "filename": "CloudNative500.md",
-                "title": "Lab 500: Oracle Developer Cloud Service Administration",
-                "description": "Access Developer Cloud Service, Complete Sprint, Run Backlog and Sprint Reports and Review Administrative Tasks",
-                "labels": {
-                    "version": "Instructor Led"
-                }
-            },
-            {
-                "number": "20",
-                "filename": "OracleCode.md",
-                "title": "Workshop Overview",
-                "description": "Step-by-step workshop instructions",
-                "labels": {
-                    "version": "Oracle Events"
-                }
-            },
-                        {
-                "number": "100",
-                "filename": "CloudNative100.md",
-                "title": "Lab 100: Agile Project Management",
-                "description": "Use Developer Cloud Service to create issues, tasks, and sprints",
-                "labels": {
-                    "version": "Oracle Events"
-                }
-            },
-            {
-                "number": "200",
-                "filename": "CloudNative200.md",
-                "title": "Lab 200: Continuous Delivery of Java Microservices",
-                "description": "Access Developer Cloud Service, Import external GIT Repository, and Build and Deploy a project using Developer Cloud Service and Oracle Application Container Cloud Service.",
-                "labels": {
-                    "version": "Oracle Events"
-                }
-            },
-            {
-                "number": "300",
-                "filename": "CloudNative300.md",
-                "title": "Lab 300: Continuous Delivery of Database Microservices",
-                "description": "Access Developer Cloud Service, Import external GIT Repository, and Build and Deploy a project using Developer Cloud Service and Oracle Application Container Cloud Service.",
-                "labels": {
-                    "version": "Oracle Events"
-                }
-            },
-            {
-                "number": "400",
-                "filename": "CloudNative400.md",
-                "title": "Lab 400: Cloud Native Rapid Javascript Development with node.js",
-                "description": "Access Developer Cloud Service, Import Code from external Git Repository, then Build and Deploy project using Developer Cloud Service and Oracle Application Container Cloud Service",
-                "labels": {
-                    "version": "Oracle Events"
-                }
-            },
-            {
-                "number": "500",
-                "filename": "CloudNative500.md",
-                "title": "Lab 500: Oracle Developer Cloud Service Administration",
-                "description": "Access Developer Cloud Service, Complete Sprint, Run Backlog and Sprint Reports and Review Administrative Tasks",
-                "labels": {
-                    "version": "Oracle Events"
-                }
             }
-
         ]
     }
 }

@@ -80,33 +80,20 @@ Now add the below lines after in the CafeteriaAssistanceBot lab1 YAML flow like 
 
 ```
 interactive:
-
-component: \"System.Interactive\"
-
-properties:
-
-sourceVariableList:
-
-variable: \"feedback\"
-
-id: \"CafeteriaAssistanceBotFeedback\"
-
-prompt: \"Please provide us feedback using the below link\"
-
-feedbackDone:
-
-component: \"System.Output\"
-
-properties:
-
-text: \"Thank\'s for providing your valuable feedback. Have a nice day!\"
-
-keepTurn: true
-
-transitions:
-
-return: \"feedbackDone\"
-
+   component: "System.Interactive"
+   properties:
+     sourceVariableList:
+     variable: "feedback"
+     id: "Cafeteria_Assistance_Feedback_Bot"
+     prompt: "Please provide us feedback using the below link"
+   transitions: {}
+ feedbackDone:
+   component: "System.Output"
+   properties:
+     text: "Thank's for providing your valuable feedback. Have a nice day!"
+     keepTurn: true
+   transitions:
+     return: "feedbackDone"
 ```
 
 Follow the below screen for the same:
