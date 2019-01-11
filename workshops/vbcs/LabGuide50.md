@@ -57,7 +57,7 @@ During this lab we will take your new trial account and show you how to provisio
 
   ![](images/100/LabGuide50-11580389.png)
 
-- On the next screen set your instance name, enter a description and select the **us-phoenix-1** data center.
+- On the next screen set your instance name, enter a description and select  **No Preference** as your data center.
 
   ![](images/100/LabGuide50-e55cd2f8.png)
 

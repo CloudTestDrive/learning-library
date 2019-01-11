@@ -1,4 +1,4 @@
-# Audit Practice - OCI Audit Service
+# OCI Audit Service
   
 ## Table of Contents
 
@@ -6,10 +6,9 @@
 
 [Pre-Requisites](#pre-requisites)
 
-[Audit-Practice 1: Sign in to OCI Console and Create Object Storage Bucket ](#Audit-practice-1)
+[Practice-1: Sign in to OCI Console and Create Object Storage Bucket](#practice-1-sign-in-to-oci-console-and-create-object-storage-bucket)
 
-[Audit-Practice 2: Upload Object and Check Audit logs](#Audit-practice-2)
-
+[Practice-2: Upload Object and Check Audit logs](#practice-2-upload-object-and-check-audit-logs)
 
 ## Overview
 
@@ -23,103 +22,69 @@ The purpose of this lab is to give you an overview of the Audit Service and an e
 
 - Oracle Cloud Infrastructure account credentials (User, Password, Tenant, and Compartment)  
 
-## Audit-Practice-1 
-### __Sign in to OCI console and create Object Storage__
-
-**Overview**
-
-In this practice, you sign in to the Oracle Cloud Infrastructure console using your credentials and create Object Storage Bucket.
-
-Assumptions
-
-Oracle Cloud Infrastructure account credentials (User, Password, Tenant, and Compartment) are available
-
-**Note:** OCI UI is being updated thus some screenshots in the instructions might be different than actual UI
-
 **Before You Begin**
 
 - We recommend using Chrome or Edge as the broswer. Also set your browser zoom to 80%
+
+**Note:** OCI UI is being updated thus some screenshots in the instructions might be different than actual UI
 
 Ensure you have below information available:
 
 - Tenant, User name, Password, and compartment name
 
-**Duration: 5 minutes**
+## Practice-1: Sign in to OCI Console and Create Object Storage Bucket
 
-**Tasks**
+1. Sign in using your tenant name, user name and password.
 
-**1** - Sign In
+2. Once signed in select the compartment assigned to you from drop down menu on left part of the screen
 
-a) Sign in using your tenant name, user name and password.
-
-b) Once signed in select the compartment assigned to you from drop down menu on left part of the screen
-
-c) From the OCI Services menu,click **Object Storage** then **Create Bucket**
+3. From the OCI Services menu,click **Object Storage** then **Create Bucket**
 
 **NOTE:** Ensure the correct Compartment is selected under COMPARTMENT list
-![]( img/OBJECT-STORAGE001.PNG)
-![]( img/OBJECT-STORAGE002.PNG)
+![]( img/AUDIT001.PNG)
+![]( img/AUDIT002.PNG)
 
-Fill out the dialog box:
+4. Fill out the dialog box:
+- **Bucket Name:** Provide a name (Test-Bucket in this lab)
+- **Storage Tier:**  STANDARD 
 
-**Bucket Name:** Provide a name (Test-Bucket in this lab)
-**Storage Tier:**  STANDARD 
+5. Click **Create Bucket**
+![]( img/AUDIT003.PNG)
 
-d) Click **Create Bucket**
-![]( img/OBJECT-STORAGE003.PNG)
+## Practice-2: Upload Object and Check Audit logs
 
-## Audit-Practice-2 
-### __Upload Object and Check Audit logs__
+1. Click the Apps icon in the toolbar and select  Git-Bash to open a terminal window.
+![]( img/AUDIT004.PNG)
 
-#### Overview
+2. Change directory to the Downloads folder Enter command: 
 
-In this section we will go over the steps needed to upload an object 
-(text file, media file, image etc) and how to create a pre-authenticated 
-request so the object is accessible from the internet.
+**cd /c/Users/PhotonUser/Downloads/**
+![]( img/AUDIT005.PNG)
 
-**Before You Begin**
-
-You should have completed Audit-Practice-1
-
-**Duration: 20 minutes**
-
-**Tasks**
-
-**1** - Open built in Git bash application and create a sample file
-
-a) Click the Apps icon in the toolbar and select  Git-Bash to open a terminal window.
-
-![]( img/OBJECT-STORAGE004.PNG)
-
-b) Change directory to the Downloads folder Enter command:
-**$ cd /c/Users/PhotonUser/Downloads/**
-![]( img/OBJECT-STORAGE005.PNG)
-c) Create a sample file, Enter command:
+3. Create a sample file, Enter command:
 **touch samplefile**  This should create a file by the name"samplefile" in the Downloads folder
 
-**2** - Now, let’s upload this file to Object Stoage Bucket
-
-a) Switch to OCI window and click the Bucket Name.
+4. Switch to OCI window and click the Bucket Name.
 
 **HINT:** You can swap between OCI window and any other application(git-bash etc) by clicking switch window
-![]( img/OBJECT-STORAGE006.PNG)
 
-b) Bucket detail window should be visible. Click **Upload Object**
-![]( img/OBJECT-STORAGE007.PNG)
+![]( img/AUDIT006.PNG)
 
-c) Click on Upload Object > Browse > This PC > Downloads. You should see the sample file created earlier
+5. Bucket detail window should be visible. Click **Upload Object**
 
-d) Select the file, then click **Upload Object** in the Dialog box.
+![]( img/AUDIT007.PNG)
 
-**3** - Check Audit logs
+6. Click on Upload Object > Browse > This PC > Downloads. You should see the sample file created earlier
 
-a) In OCI services menu, Click Audit under Governance. Scroll down or type the bucket name in 
+7. Select the file, then click **Upload Object** in the Dialog box.
+
+8. In OCI services menu, Click **Audit** under Governance. Scroll down or type the bucket name in 
 Keyword section. You can choose other options
 such as dates and Request Action Type. For this 
 lab we will leave them as default. Audit logs for the Storage bucket should be visible
-![]( img/OBJECT-STORAGE008.PNG)
-![]( img/OBJECT-STORAGE009.PNG)
 
+![]( img/AUDIT008.PNG)
+![]( img/AUDIT009.PNG)
 
-**You have utilized OCI’s Audit service to extract events specific to Storage bucket created. Audit service can be used to monitor operations performed on OCI resources and can assist in trouble 
-shooting your OCI environment**
+***You have utilized OCI’s Audit service to extract events specific to Storage bucket created. Audit service can be used to monitor operations performed on OCI resources and can assist in trouble 
+shooting your OCI environment***

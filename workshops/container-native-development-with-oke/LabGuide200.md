@@ -25,7 +25,7 @@ During this lab, you will take on the **DevOps Engineer Persona**. You will prov
 ## Required Artifacts
 
 - The following lab requires:
-  - an Oracle Public Cloud account that will be supplied by your instructor, or a Trial Account
+  - an Oracle Cloud Trial Account
 
 # Provision Kubernetes Using the OCI Console
 
@@ -238,7 +238,6 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 ### **STEP 6**: Prepare OCI CLI for Cluster Access and Download kubeconfig
 
   - Your instance should now be in the **Running** state. Let's SSH into the instance and install the command line utility that will let us interact with our cluster. Still on the instance details page, find the **Public IP Address** and copy it to the clipboard.
-
     ![](images/200/LabGuide200-3986ce91.png)
 
   - Open an SSH connection to the instance using the following OS-specific method:
@@ -274,11 +273,9 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
     ![](images/200/LabGuide200-dd2c64cd.png)
 
-  - When the install is finished, configure the OCI CLI by running `oci setup config` in your SSH session. In a web browser on your local machine, open your **User Details** page by selecting Identity->Users from the navigation menu and select **View User Details** from the three-dots menu for your user. You will need some details from this page to complete the setup.
+  - When the install is finished, configure the OCI CLI by running `oci setup config` in your SSH session. In a web browser on your local machine, open your **User Settings** page: use the navigation menu to go to Identity->Users and select **View User Details** from the three-dots menu for your user. You will need some details from this page to complete the setup.
 
-    ![](images/LabGuide200-6f162893.png)
-
-    ![](images/LabGuide200-fbfddd39.png)
+    ![](images/LabGuide200-f1749ef3.png)
 
   - After initiating `oci setup config`, respond to the prompts as follows:
     - Enter a location for your config: **accept default by pressing enter**
@@ -569,6 +566,10 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
     cat kubeconfig | grep token | awk '{print $2}'
     ```
 
+    **NOTE**: You may have to use Bash Shell or Git Bash to run the command above. If you don't have either one available, you can open the `kubeconfig` file in Notepad, find the `token:` section at the bottom of the file, and copy the token value from there.
+
+      ![](images/LabGuide200-406fe845.png)
+
   **Mac/Linux**
     ```bash
     cd ~/container-workshop
@@ -590,7 +591,7 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
   **Mac/Linux**
     ```bash
-    echo $(kubectl config view | grep server | cut -f 2- -d ":" | tr -d " ")
+    echo $(./kubectl config view | grep server | cut -f 2- -d ":" | tr -d " ")
     ```
 
 - In your Wercker browser tab, add a new environment variable with the key **KUBERNETES_MASTER**. In the value field, **paste** the value you copied from `kubectl`. The value **must start with https://** for Wercker to communicate with the cluster. When finished, click **Add**.
@@ -605,9 +606,11 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
   ![](images/200/LabGuide200-ad86d83b.png)
 
-- Switch to your **OCI Console** browser tab and select **User Settings** from the user drop down menu in the upper right corner. If you've closed the tab, [log in again](https://console.us-ashburn-1.oraclecloud.com).
+- Switch to your **OCI Console** browser tab. Use the navigation menu to go to Identity->Users and select **View User Details** from the three-dots menu for your user. If you've closed the tab, [log in again](https://console.us-ashburn-1.oraclecloud.com).
 
-  ![](images/200/LabGuide200-854c3c06.png)
+  ![](images/LabGuide200-f1749ef3.png)
+
+  **NOTE**: You may see two users in the list, one that is named with just your email address, and another that is named `oracleidentitycloudservice`/your-email-address. **Choose the one that is named just your-email-address.**
 
 - In the Resources menu of the user settings page, click **Auth Tokens**. Then click **Generate Token**.
 
@@ -734,4 +737,4 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
 - Some tweets are indeed displayed, but they aren't relevant to this product. It looks like there is a bug in our twitter feed microservice! Continue on to the next lab to explore how to make bug fixes and updates to our microservice.
 
-**You are now ready to move to the next lab.**
+**You are now ready to move to the next lab: [Lab 300](LabGuide300.md)**

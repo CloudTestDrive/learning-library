@@ -15,19 +15,18 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 **Extend Your Application Using a Function**
 
 - Run Your Function Locally
-  - Install Fn Server on Your Virutal Machine
+  - Install Fn Server on Your Virtual Machine
   - Clone the Function Repository
   - Deploy the Function Locally
   - Test the Function Using curl
 - Deploy Your Function to Fn on Kubernetes
-  - Install Helm on Your Local Machine
-  - Deploy Fn Server to Kubernetes Using Helm
+  - Deploy Fn Server to Kubernetes
   - Deploy Your Function to Fn Server on Kubernetes
   - Test Your Function in the Product Catalog
 
 ## Required Artifacts
 - The following lab requires:
-  - an Oracle Public Cloud account that will be supplied by your instructor, or a Trial Account
+  - an Oracle Cloud Trial Account
   - a [GitHub account](https://github.com/join)
 
 # Extend Your Application Using a Function
@@ -124,6 +123,13 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
 ### **STEP 4**: Test the Function Using curl
 
+- Before we can test our function, we must disable SELinux, as it interferes with the ability of Fn to run containers. Run these commands to **disable SELinux**
+
+  ```bash
+  sudo sed -i 's/SELINUX=enforcing/SELINUX=permissive/' /etc/selinux/config
+  sudo setenforce 0
+  ```
+
 - With the function deployed to our local Fn Server, we can use **curl** to test it. Execute the following command while still in the image-resize directory:
 
   ```bash
@@ -144,77 +150,69 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
 ## Deploy Your Function to Fn on Kubernetes
 
-### **STEP 5**: Install Helm on Your Cloud VM
+### **STEP 5**: Deploy Fn Server to Kubernetes
 
-- Helm is a package manager for Kubernetes that streamlines installing and managing applications on your Kubernetes cluster. We'll use Helm in this lab to install Fn on our Kubernetes cluster. Run the following command to install the latest version:
+- We are going to use the Kubernetes Dashboard **Create An App** wizard to deploy Fn to Kubernetes. This is suitable for a test environment, but does not account for production best practices. For a production deployment, consider using [Helm](https://github.com/kubernetes/helm#install) and the [fn-helm chart](https://github.com/fnproject/fn-helm) to bring up your Fn Server.
+
+- Log in to the [Kubernetes Dashboard](http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/) from your local machine. If you have stopped it, restart `kubectl proxy`.
+
+- Click the **Create** button
+
+  ![](images/LabGuide500-76fe5ae1.png)
+
+- Click the **Create An App** tab -- this gives us the form-based deployment and service creation page, rather than the pre-written yaml options.
+
+  ![](images/LabGuide500-b020b936.png)
+
+- Fill out the form with the following values. Then click **Show Advanced Options**
+
+  - App name: **my-release-fn-api** (this name must match the URL that our Product Catalog application is looking for)
+  - Container image: **fnproject/fnserver** (this is the official Fn Project Fn Server image)
+  - Number of Pods: **1** (this can be customized)
+  - Service: **External** (this will create a load balancer for our service)
+  - Port: **80** (this must match the port that the Product Catalog will try to access)
+  - Target Port: **8080** (this is the port that Fn is listening on inside its container)
+  - Click **Show Advanced Options**
+
+  ![](images/LabGuide500-060803f8.png)
+
+- In the Advanced Options section, check the box for **Run as privileged**, then click **Deploy**
+
+  ![](images/LabGuide500-f0380bee.png)
+
+- On the Overview page, you'll see your **new Deployment** being created:
+
+  ![](images/LabGuide500-c4797741.png)
+
+- We also expect a **Service** of type **Load Balancer** to be created. **Scroll down** to the **Services** table to check.
+
+  ![](images/LabGuide500-bd521027.png)
+
+- Click on the service name, **my-release-fn-api**. Look for the **External endpoints** field. If it is filled in with an IP address and port, your load balancer is finished provisioning. If it is not, wait a moment and refresh this page.
+
+  ![](images/LabGuide500-fd6b90bf.png)
+
+- We need this load balancer URL to set an environment variable that points your local Fn installation to the Fn Server we've deployed to the Kubernetes cluster. Right click the link and choose **Copy Link Location** to store it in your clipboard.
+
+  ![](images/LabGuide500-7aa1aea2.png)
+
+- In your _SSH session_ to your cloud VM, create an environment variable called `FN_API_URL`:
 
   ```bash
-  curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash
+  export FN_API_URL=<Paste-URL-From-Clipboard>
   ```
 
-- Run the following command to initialize **Helm**
+  - **NOTE**: You can alternatively get the load balancer IP address from `kubectl`, which is useful for scripting and automation:  `export FN_API_URL=http://$(kubectl get svc --namespace default my-release-fn-api -o jsonpath='{.status.loadBalancer.ingress[0].ip}'):38080/`
 
-  ```bash
-  helm init --upgrade
-  ```
-
-  ![](images/500/LabGuide500-b7cba2ca.png)
-
-### **STEP 6**: Deploy Fn Server to Kubernetes Using Helm
-
-- Clone the **fn-helm git repository** using the following command.
-
-  ```bash
-  cd ~ && git clone https://github.com/fnproject/fn-helm.git && cd fn-helm
-  ```
-
-  ![](images/500/LabGuide500-0745fded.png)
-
-- Prepare the **dependencies** of the Fn chart by running:
-
-  ```bash
-  helm dep build fn
-  ```
-
-  ![](images/500/LabGuide500-49869624.png)
-
-- Install the **Fn chart** by running the following command. **NOTE** _DO NOT_ change the name of the release, `my-release`. This name becomes part of the Kubernetes service name, which is used for DNS routing. If the name is changed, the product catalog application will not be able to communicate with the deployed function.
-
-  ```bash
-  helm install --name my-release fn
-  ```
-
-  ![](images/500/5.png)
-
-- As directed by the output of the install command, set the `FN_API_URL` environment variable by waiting for the load balancer to be provisioned and using its external IP address in the URL.
-
-  - To check the status of the load balancer from the command line, run the following command. Note, you can use Ctrl-C to stop the command running, and re-run to again check if the External-IP field is populated:
-
-    `kubectl get svc --namespace default -w my-release-fn-api`
-
-    ![](images/500/14.png)
-
-  - Once the **External-IP** field is populated (which could take up to 5 minutes), set the **FN_API_URL** environment variable using the following command:
-
-    ```bash
-    export FN_API_URL=http://$(kubectl get svc --namespace default my-release-fn-api -o jsonpath='{.status.loadBalancer.ingress[0].ip}'):80
-    ```
-
-    ![](images/500/16.png)
-
-    **NOTE**: You can also find out the API URL from the [Kubernetes dashboard](). To check the status of the load balancer from the [Kubernetes dashboard](), click **Services** from the left side navigation menu and look at the **External endpoints** column of the **my-release-fn-api** service.   
-
-    ![](images/500/15.png)
-
-  - Verify that the environment variable was set correctly by running the following command. Note that your IP address will differ from the screenshot.
+  - Verify that the environment variable was set correctly by running the following command. Note that your IP address will differ from the screenshot. Ensure that your URL contains a **trailing forward slash**.
 
     `echo $FN_API_URL`
 
-    ![](images/500/17.png)
+    ![](images/LabGuide500-aab88037.png)
 
-### **STEP 7**: Deploy Your Function to Fn Server on Kubernetes
+### **STEP 6**: Deploy Your Function to Fn Server on Kubernetes
 
-- In your SSH session, change directories to cloned function directory from **STEP 2**.
+- In your _SSH session_, change directories to cloned function directory from **STEP 2**.
 
   ```bash
   cd ~/image-resize
@@ -232,9 +230,9 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
   ![](images/500/LabGuide500-21bab048.png)
 
-- In order to push our function Docker image into our OCI Registry, we will need to log in using the Docker CLI. The password we use to authenticate is an **OCI Auth Token**, just as we created for Wercker in Lab 200. Navigate to the **OCI Console** in a web browser on your local machine. Open your **User Settings** page by selecting User Settings from the user menu in the top right corner.
+- In order to push our function Docker image into our OCI Registry, we will need to log in using the Docker CLI. The password we use to authenticate is an **OCI Auth Token**, just as we created for Wercker in Lab 200. Navigate to the **OCI Console** in a web browser on your local machine. Open your **User Settings** page by using the navigation menu to go to Identity->Users and select **View User Details** from the three-dots menu for your user.
 
-    ![](images/200/LabGuide200-854c3c06.png)
+  ![](images/LabGuide200-f1749ef3.png)
 
 - In the Resources menu of the user settings page, click **Auth Tokens**. Then click **Generate Token**.
 
@@ -268,10 +266,22 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
   ![](images/500/19.png)
 
-- Test the function using **curl**, but this time using the URL of the remote Fn Server:
+- Now the function has been pushed to our _Private_ Docker repository in OCIR (since new repositories are private by default in OCIR). We could provide our Auth Token to the Fn Server running in Kubernetes to allow it to pull our image, but let's instead make our OCIR repository public, so that it can be pulled without authentication. Open the **OCI Console** website in a browser _on your local machine_. From the Developer Services section of the navigation menu, choose **Registry (OCIR)**
+
+  ![](images/LabGuide500-fc970891.png)
+
+- Click on **resize128**, the name of our function and our Docker repository
+
+  ![](images/LabGuide500-696c3bde.png)
+
+- From the Actions drop down, click **Change to Public**
+
+  ![](images/LabGuide500-0b787344.png)
+
+- Now, back in the _SSH session_, test the function using **curl**, but this time using the URL of the remote Fn Server:
 
   ```bash
-  curl -X POST --data-binary @"sample-image.jpg" -H "Content-Type: application/octet-stream" $FN_API_URL/t/imgconvert/resize128 > thumbnail-remote.jpg
+  curl -X POST --data-binary @"sample-image.jpg" -H "Content-Type: application/octet-stream" ${FN_API_URL}t/imgconvert/resize128 > thumbnail-remote.jpg
   ```
 
   ![](images/500/20.png)
@@ -286,7 +296,7 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 
 - Our function is deployed and available on our remote Fn Server, which is running in our Kubernetes cluster. The last thing to verify is that the product catalog application is able to find and use our function. Let's test out the upload image feature.
 
-### **STEP 8**: Test Your Function in the Product Catalog
+### **STEP 7**: Test Your Function in the Product Catalog
 
 - Open the **product catalog** website in a browser _on your local machine_. If you don't have the URL, you can look in the Kubernetes dashboard for the **external endpoint** of the product-catalog-service, or you can run the following command from your SSH session:
 
