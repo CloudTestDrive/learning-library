@@ -29,7 +29,7 @@ During this lab, you will take on the **DevOps Engineer Persona**. You will prov
 
 # Provision Kubernetes Using the OCI Console
 
-## Set Up Oracle Cloud infrastructure
+## Set Up Oracle Cloud Infrastructure
 
 ### **STEP 1**: Log in to your OCI dashboard
 
@@ -79,9 +79,9 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
     ![](images/200/7.png)
 
-  - In the **Name** field, enter `Demo`. Enter a description of your choice. Click **Create Compartment**.
+  - In the **Name** field, enter `Demo`. Enter a description of your choice. In the **Parent Compartment** field, ensure that the `root` compartment is selected (it will have the same name as your Oracle Cloud Account). Click **Create Compartment**.
 
-    ![](images/200/LabGuide200-9341ed24.png)
+    ![](images/LabGuide200-2b3b6b30.png)
 
 ### **STEP 3**: Add a Policy Statement for OKE
 
@@ -159,6 +159,12 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
         ![](images/200/LabGuide200-e2207b4c.png)
 
       - Locate and run **puttygen.exe** in the PuTTY install folder.
+
+      - Ensure that **RSA** or **SSH-2 RSA** is selected in the `Type of key to generate` field (which one you see is dependent on your version of PuTTY)
+
+      ![](images/LabGuide200-614f9c26.png)
+
+      ![](images/LabGuide200-f0a8b7ba.png)
 
       - Click **Generate**
 
@@ -281,6 +287,11 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
     - Enter a location for your config: **accept default by pressing enter**
     - Enter a user OCID: copy your OCID by clicking **Copy** in the **User Information** box in OCI Console
     - Enter a tenancy OCID: copy the **Tenancy OCID** from the tenancy details page (found under the administration section of the OCI navigation menu)
+
+      ![](images/LabGuide300-fefb896c.png)
+
+      ![](images/LabGuide300-80c6b300.png)
+
     - Enter a region: type the **region shown in the upper right** corner of OCI Console
     - Do you want to generate a new RSA key pair?: **Y**
     - Enter a directory for your keys to be created: **accept default by pressing enter**
@@ -289,7 +300,7 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
     ![](images/200/LabGuide200-315d446f.png)
 
-  - You've just generated an RSA key pair that we will use to authenticate you to the OCI API. On the User Settings page in your browser, click **Add Public Key**
+  - You've just generated an RSA key pair that we will use to authenticate you to the OCI API. Click **back** to get back to the User Settings page in your browser, click **Add Public Key**
 
     ![](images/200/LabGuide200-70626501.png)
 
@@ -337,56 +348,82 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
 ### **STEP 7**: Install and Test kubectl on Your Local Machine
 
-  - The method you choose to install `kubectl` will depend on your operating system and any package managers that you may already use. The generic method of installation, downloading the binary file using `curl`, is given below (**run the appropriate command in a terminal or command prompt**). If you prefer to use a package manager such as apt-get, yum, homebrew, chocolatey, etc, please find the specific command in the [Kubernetes Documentation](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
+- The method you choose to install `kubectl` will depend on your operating system and any package managers that you may already use. The generic method of installation, downloading the binary file using `curl`, is given below (**run the appropriate command in a terminal or command prompt**). If you prefer to use a package manager such as apt-get, yum, homebrew, chocolatey, etc, please find the specific command in the [Kubernetes Documentation](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
 
 
-    **Windows**
-      ```bash
-      cd %USERPROFILE%\container-workshop
-      curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.11.2/bin/windows/amd64/kubectl.exe
-      ```
+  **Windows**
+    ```bash
+    cd %USERPROFILE%\container-workshop
+    curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.11.2/bin/windows/amd64/kubectl.exe
+    ```
 
-    **Mac**
-      ```bash
-      cd ~/container-workshop
-      curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/darwin/amd64/kubectl
-      chmod +x ./kubectl
-      ```
+  **Mac**
+    ```bash
+    cd ~/container-workshop
+    curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/darwin/amd64/kubectl
+    chmod +x ./kubectl
+    ```
 
-    **Linux**
-      ```bash
-      cd ~/container-workshop
-      curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-      chmod +x ./kubectl
-      ```
+  **Linux**
+    ```bash
+    cd ~/container-workshop
+    curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+    chmod +x ./kubectl
+    ```
 
-  - In your terminal window or command prompt, run the following commands to verify that `kubectl` is able to communicate with your cluster. You should see `cluster-info` print out the URL of the Kubernetes Master node and `get nodes` print out the IP address and status of each of the worker nodes.
+- In your terminal window or command prompt, run the following commands to verify that `kubectl` is able to communicate with your cluster. You should see `cluster-info` print out the URL of the Kubernetes Master node and `get nodes` print out the IP address and status of each of the worker nodes.
 
-    **Windows**
-      ```bash
-      set KUBECONFIG=%USERPROFILE%\container-workshop\kubeconfig
-      kubectl.exe cluster-info
-      kubectl.exe get nodes
-      ```
+  **Windows**
+    ```bash
+    set KUBECONFIG=%USERPROFILE%\container-workshop\kubeconfig
+    kubectl.exe cluster-info
+    kubectl.exe get nodes
+    ```
 
-    **Mac/Linux**
-      ```bash
-      export KUBECONFIG=~/container-workshop/kubeconfig
-      ./kubectl cluster-info
-      ./kubectl get nodes
-      ```
+  **Mac/Linux**
+    ```bash
+    export KUBECONFIG=~/container-workshop/kubeconfig
+    ./kubectl cluster-info
+    ./kubectl get nodes
+    ```
 
-  - Now that we have verified that `kubectl` is connected to our cluster, we can use it to start a proxy that will give us access to the Kubernetes Dashboard through a web browser at a localhost URL. Run the following command in the same terminal window:
+    ![](images/LabGuide200-397f4902.png)
 
-    **Windows**
-      ```bash
-      kubectl.exe proxy
-      ```
+    ![](images/LabGuide200-778c8b15.png)
 
-    **Mac/Linux**
-      ```bash
-      ./kubectl proxy
-      ```
+    **NOTE**: You should see in the `cluster-info` that the Kubernetes master has an `oraclecloud.com` URL. If it instead has a `localhost` URL, your `KUBECONFIG` environment variable may not be set correctly. Double check the environment variable against the path and filename of your `kubeconfig` file.
+
+- Now that we have verified that `kubectl` is connected to our cluster, let's increase the default auto-logout time so that we don't have to keep re-authenticating during the workshop. Note that the default logout time of 15 minutes is set for security reasons. The `--token-ttl=43200"` argument in the following command is the only change that we are making to the dashboard.
+
+  **NOTE**: The following commands are **optional**.
+
+  **Windows**
+  ```bash
+  kubectl.exe patch deployment kubernetes-dashboard -n kube-system -p "{\"spec\": {\"template\": {\"spec\": {\"containers\": [{\"name\": \"kubernetes-dashboard\", \"args\": [\"--token-ttl=43200\", \"--auto-generate-certificates\"]}]}}}}"
+  ```
+
+  **Mac/Linux**
+  ```bash
+  ./kubectl patch deployment kubernetes-dashboard -n kube-system -p '{"spec": {"template": {"spec": {"containers": [{"name": "kubernetes-dashboard", "args": ["--token-ttl=43200", "--auto-generate-certificates"]}]}}}}'
+  ```
+
+  ![](images/LabGuide200-a5c59f02.png)
+
+- Now that we've increased the session timeout, we can use `kubectl` to start a proxy that will give us access to the Kubernetes Dashboard through a web browser at a localhost URL. Run the following command in the same terminal window:
+
+  **Windows**
+    ```bash
+    kubectl.exe proxy
+    ```
+
+  **Mac/Linux**
+    ```bash
+    ./kubectl proxy
+    ```
+
+  ![](images/LabGuide200-73acec26.png)
+
+  **NOTE**: If you receive an error stating `bind: address already in use`, you may have another application running on port 8001. You can specify a different port for the proxy by passing the `--port=` parameter, for example `kubectl proxy --port=8002`. Note that you  will have to modify the URL for the dashboard in the next step to match this port.
 
 - Leave the proxy server running and navigate to the [Kubernetes Dashboard by Right Clicking on this link](http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/), and choosing **open in a new browser tab**.
 
@@ -532,7 +569,7 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
 ### **STEP 10**: Set up deployment pipelines in Wercker
 
-- Open **[Wercker](https://app.wercker.com)** in a new tab or browser window, or switch to it if you already have it open. In the top navigation bar, click **Pipelines**, then click on your **twitter-feed** application.
+- Open **[Wercker](https://app.wercker.com)** in a new tab or browser window, or switch to it if you already have it open. In the top navigation bar, click **Pipelines**, then click on your **twitter-feed-oke** application.
 
   ![](images/200/30.png)
 
@@ -563,12 +600,12 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
   **Windows**
     ```bash
     cd %USERPROFILE%\container-workshop
-    cat kubeconfig | grep token | awk '{print $2}'
+    notepad kubeconfig
     ```
 
-    **NOTE**: You may have to use Bash Shell or Git Bash to run the command above. If you don't have either one available, you can open the `kubeconfig` file in Notepad, find the `token:` section at the bottom of the file, and copy the token value from there.
+    - Find the `token:` section at the bottom of the file, and copy the token value from there.
 
-      ![](images/LabGuide200-406fe845.png)
+    ![](images/LabGuide200-406fe845.png)
 
   **Mac/Linux**
     ```bash
@@ -628,6 +665,26 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
   ![](images/200/LabGuide200-bb187bd2.png)
 
+- Lastly, let's go back and look at the `DOCKER_REGISTRY` variable to ensure that we have specified the correct region. In the **OCI Console**, look in the top right corner for the currently selected region:
+
+  ![](images/LabGuide200-fd1aa1f3.png)
+
+  - If the region is `ashburn`, then you do not need to change anything. The URL `iad.ocir.io` is correct.
+
+  - If the region is not `ashburn`, replace the `iad` part of the `DOCKER_REGISTRY` environment variable to match your region:
+
+  ```
+  London = lhr
+  Frankfurt = fra
+  Phoenix = phx
+  Ashburn = iad
+  ```
+
+  - For example, if your region is `eu-frankfurt-1`, change the URL to `fra.ocir.io` and click the **save** button
+
+    ![](images/LabGuide200-cc8b640d.png)
+
+
 - Now we're ready to try out our workflow from start to finish. We could do that by making another commit on GitHub, since Wercker is monitoring our source code. We can also trigger a workflow execution right from Wercker. We'll see how in the next step.
 
 ### **STEP 12**: Trigger a retry of the pipeline
@@ -654,13 +711,32 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
   ![](images/200/LabGuide200-2de08741.png)
 
+- If you prefer to use the command line as opposed to the web browser method of testing the service, run the following command to verify that our microservice is returning JSON data:
 
+  **Mac/Linux/Git Bash**
+  ```bash
+  export KUBECONFIG=~/container-workshop/kubeconfig
+  ./kubectl exec -it $(./kubectl get pod -l "app=twitter-feed" -o jsonpath='{.items[0].metadata.name}') -- /bin/sh -c '/usr/bin/curl -s http://$HOSTNAME:8080/statictweets | head -c 1000; echo'
+  ```
 
+  **Windows**
+  ```bash
+  set KUBECONFIG=%USERPROFILE%\container-workshop\kubeconfig
+  kubectl.exe get pod -l "app=twitter-feed" -o jsonpath="{.items[0].metadata.name}" > podname.txt && FOR /F usebackq %A IN (`more podname.txt`) DO kubectl.exe exec -it %~A -- /bin/sh -c "/usr/bin/curl -s http://$HOSTNAME:8080/statictweets | head -c 1000; echo"
+  ```
+
+  - If you see JSON data returned, **skip to Step 14** where we will deploy the other components of our product catalog application. Otherwise, if the commands didn't work, you don't have PowerShell, or you prefer a browser-based interface, continue on:
 
 - In a terminal window, start the **kubectl proxy** using the following command. Your `KUBECONFIG` environment variable should still be set from a previous step. If not, reset it.
 
+  **Windows**
   ```bash
-  kubectl proxy
+  kubectl.exe proxy
+  ```
+
+  **Mac/Linux**
+  ```bash
+  ./kubectl proxy
   ```
 
 - In a browser tab, navigate to the [**Kubernetes dashboard**](http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/)

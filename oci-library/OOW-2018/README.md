@@ -3,7 +3,7 @@
 
 |                  **HOL**              |    **Name**  |   
 |----------------------------------------|:------------:|
-|HOL6377|[Autonomous Data Warehouse on Oracle Cloud Infrastructure](/oci-library/Foundational/Autonomous_Data_Warehouse/ADW_HOL.md) |  
+|HOL6377|[Autonomous Data Warehouse on Oracle Cloud Infrastructure](/oci-library/L100-LAB/Autonomous_Data_Warehouse/ADW_HOL.md) |  
 |HOL6685|[Machine Learning on Oracle Cloud Infrastructure](./ML-GPU/ML_HOL.md)  |   
 |HOL6952|[Oracle Code - Terraform and OKE](/oci-library/DevOps/Terraform-and-OKE-LAB/tf_oke_hol.md) |   
 |HOL6375|[Using Oracle Containers Engine for Kubernetes](/oci-library/DevOps/OKE/OKE-HOL1.md)|   
