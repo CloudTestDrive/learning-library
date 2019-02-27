@@ -136,7 +136,20 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
 ### **STEP 5**: Launch a Cloud Compute Instance for Cluster Management
 
-  - Before we can launch a compute instance, we need two things: a Virtual Cloud Network to connect it to, and an SSH key pair to use for authentication. We could create a new VCN, but since the cluster wizard is already going to create one, we will just make use of that. So let's work on creating an SSH key pair for our instance. The method of generating an SSH key pair will depend on your operating system.
+Before we can launch a compute instance, we need two things: a Virtual Cloud Network to connect it to, and an SSH key pair to use for authentication. 
+
+- Creating a new Virtual Cloud Network :
+  - Navigate to "Networking" , "Virtual Cloud Networks" page using the menu in the upper left.  You should see the VCN that was created for the OKE cluster.
+  - ![](images/200/CreateVCN1.png)
+  - Click the "Create Virtual Cloud Network" button
+    - In the pop-up screen, enter following parameters:
+      - **Name**: a readable name you can remember, for example **MyOpenVCN**
+      - Select the option **CREATE VIRTUAL CLOUD NETWORK PLUS RELATED RESOURCES**
+      - Scroll to the botton and click **Create Virtual Cloud Network to finalise**
+
+![](images/200/CreateVCN2.png)
+
+  - Now let's create the SSH key pair for our instance. The method of generating an SSH key pair will depend on your operating system.
 
     **NOTE**: There are several files that will be downloaded or created on your local machine during this workshop. We recommend creating a directory to store them in for ease of locating and cleaning up. In this step, you will create a directory inside your home/user directory called `container-workshop`. You are free to change the location and name of this directory, but the lab guide will assume it is located at `~/container-workshop/`. **You will need to modify the given terminal commands throughout this lab** if you change the location or name of the directory.
 
@@ -227,11 +240,11 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
   - Make the following selections in the **Configure Networking** form:
     - In the VCN Compartment field, ensure **Demo** is selected.
-    - In the VCN field, ensure **oke-vcn-quick-cluster1** is selected (if you changed the name of your cluster, the `cluster1` portion of these name will differ).
+    - In the VCN field, ensure **MyOpenVCN** is selected 
     - In the Subnet Compartment field, ensure **Demo** is selected.
-    - In the Subnet field, select the subnet that begins with **oke-subnet-quick-cluster1**. Take care __not__ to select the subnet that begins with oke-svclbsubnet, as this one has a wide open security list (it is meant only for load balancers).  
+    - In the Subnet field, select the one subnet that is present  
 
-    ![](images/LabGuide200-e67f88fa.png)
+    ![](images/200/MyOpenVCN.png)
 
   - Click **Create**
 
