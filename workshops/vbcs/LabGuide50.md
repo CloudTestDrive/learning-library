@@ -24,12 +24,19 @@ During this lab we will take your new trial account and show you how to provisio
 
   ![](images/100/signIn.png)
 
-  ![](images/100/signIn2.png)
+  ![](images/100/login.png)
 
 - Enter your User Name and Password provided for your trial account and click **Sign In**
 
   ![](images/100/idcs_login.png)
 
+- You will land on the Oracle Cloud Infrastructure dashboard. Select the Hamburger Icon in the top left of the screen.
+
+  ![](images/100/oneconsoledash.png)
+
+- Scroll to the bottom of the options and select **Administration**, then select **My Services Dashboard**
+
+  ![](images/100/servicesdashboard.png)
 
 - You will be presented with a Dashboard displaying the various cloud services available to this account.
 

@@ -1,13 +1,13 @@
 <table class="tbl-heading"><tr><td class="td-logo">[![](images/obe_tag.png)](README.md)
 
-Last Updated:<br>October 18, 2018
+Last Updated:<br>November 08, 2018
 </td>
 <td class="td-banner">
-# Getting Started with Autonomous Transaction Processing                                    
+# Getting Started with Autonomous Transaction Processing
 </td></tr><table>
 
 
-This workshop walks you through all the steps to get started using the **Oracle Autonomous Transaction Processing**. Provision a database, scale ATP, load data, configure node.js with ATP, configure Java with ATP, working with REST APIs, building microservices on ATP, Configuring OCI CLI, and working with Kubernetes.
+This workshop walks you through all the steps to get started using the **Oracle Autonomous Transaction Processing**. Provision a database, scale ATP, load data, configure node.js with ATP, configure Java with ATP, working with REST APIs, building microservices on ATP, Configuring OCI CLI, working with Kubernetes and rapid application development with ATP.
 
 ## Goals for this workshop
 
@@ -20,6 +20,7 @@ This workshop walks you through all the steps to get started using the **Oracle 
 - Working with REST APIs
 - Building Microservices on ATP
 - Configure OCI-CLI
+- Rapid Application Development with Oracle ATP
 
 # How to Get Your Free Cloud Trial Account
 Please click on the following link to create your <a class=“trial-link” href="https://myservices.us.oraclecloud.com/mycloud/signup?language=en&sourceType=:ex:tb:::RC_NAMK181011P00041:ATPHOL&SC=:ex:tb:::RC_NAMK181011P00041:ATPHOL&pcode=NAMK181011P00041" target="_trial">Free Account</a>, and complete all the required steps to get your free Oracle Cloud Trial Account. When you complete the registration process you'll receive a $300 credit that will enable you to complete the lab for free.  Additionally, you'll have 1000s of hours left over to continue to explore the Oracle Cloud.
@@ -27,6 +28,10 @@ Please click on the following link to create your <a class=“trial-link” href
   - Soon after requesting your trial you will receive the following email. You may begin working on Lab 100.
 
   ![](images/readme/code_9.png)
+
+
+Detailed instruction on using the image are provided in <a href="./LabGuide1000AppDev.md" target="_blank">LabGuide10</a>
+
 
 # Workshop Overview
 
@@ -122,6 +127,18 @@ Read on to begin your Getting Started journey with Oracle Autonomous Transaction
 
 **[Click here to run Lab 9](LabGuide900ConfigureOCI-CLI.md)**
 
+
+## Lab 10: Mastering DevOps in the Oracle Cloud
+
+**Key Objectives**:
+
+- Connect Oracle ATP to Python
+- Connect Oracle ATP to Java
+- Connect Oracle ATP to Node
+- Utilize Terraform to control ATP
+- Utilize OCI-CLI to control ATP
+
+**[Click here to run Lab 11](LabGuide1000AppDev.md)**
 
 ## Appendix
 

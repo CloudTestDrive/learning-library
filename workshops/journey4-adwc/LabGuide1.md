@@ -44,9 +44,9 @@ In this section you will be provisioning an ADW instance using the cloud console
 
 ![](./images/100/Picture100-2.png)
 
--   Enter your **Cloud Account Name** and click **My Services**.
+-   Enter your **Cloud Account Name** and click next.
 
-![](./images/100/Picture100-3.jpg)
+![](./images/100/Picture100-3.png)
 
 -   Enter your Oracle Cloud **username** and **password**, and click **Sign In**.
 
@@ -54,56 +54,53 @@ In this section you will be provisioning an ADW instance using the cloud console
 
 #### **STEP 2: Create an ADW Instance**
 
--   Once you are logged in, you are taken to the cloud services dashboard where you can see all the services available to you. Click **Create Instance**.
+-   Once you are logged in, you are taken to the cloud services dashboard where you can see all the services available to you. Click the **Autonomous Database** tile.
 
 *Note:* You may also access your Autonomous Data Warehouse service via the pull out menu on the top left of the page, or by using Customize Dashboard to add the service to your dashboard.
 
-![](./images/100/Picture100-36.JPG)
+![](./images/100/Picture100-36.png)
 
-- Click **Create** on the Autonomous Data Warehouse tile. If it does not appear in your Featured Services, click on All Services and find it there.
+- Select the Data Warehousing option and click **Create Autonomous Data Warehouse Instance**.
 
 ![](images/100/LabGuide1-39fb4a5b.png)
 
-- Select the root compartment, or another compartment of your choice where you will create your new ADW instance. If you want to create a new Compartment or learn more, click <a href="https://docs.cloud.oracle.com/iaas/Content/Identity/Tasks/managingcompartments.htm#three" target="_blank">here</a>.
+- Make sure your workload type is __ADW__ or __All__ to see your Autonomous Data Warehouse instances. Select your __root compartment__, or __another compartment of your choice__ where you will create your new ADW instance. If you want to create a new compartment or learn more about them, click <a href="https://docs.cloud.oracle.com/iaas/Content/Identity/Tasks/managingcompartments.htm#three" target="_blank">here</a>.
 *Note* - Avoid the use of the ManagedCompartmentforPaaS compartment as this is an Oracle default used for Oracle Platform Services.
 
-![](./images/100/Compartment.jpg)
+![](./images/100/Compartment.png)
 
--  Click on **Create Autonomous Data Warehouse** button to start the instance creation process.
+- You can see your current default **region** in the top, right hand corner of the page. Go ahead and select a different available region such as **Phoenix** or **Toronto**.
 
-![](./images/100/Picture100-23.jpeg)
+ ![](./images/100/Region.png)
 
--  This will bring up the Create Autonomous Data Warehouse screen where you will specify the configurations of the instance. Select the root compartment, or another compartment of your choice.
+-  Click the **Create Autonomous Database** button to start the instance creation process.
 
-![](./images/100/Picture100-26.jpg)
+![](./images/100/Picture100-23.png)
 
--  Specify a memorable display name for the instance. Also specify your database's name, for this lab use ADWFINANCE.
+-  This will bring up the Create Autonomous Database screen where you will specify the configurations of the instance. Select the __Autonomous Data Warehouse__ option, and the root compartment, or another compartment of your choice.
 
-![](./images/100/Picture100-27.jpeg)
+![](./images/100/Picture100-26.png)
 
--  Next, select the number of CPUs and storage size. Here, we use 4 CPUs and 1 TB of storage.
+-  Specify a memorable display name for the instance, __ADW Finance Mart__. Also specify your database's name, for this lab use __ADWFINANCE__. Next, select the number of CPUs and storage size. Here, we use __2 CPUs__ and __1 TB__ of storage.
 
-![](./images/100/Picture100-28.jpeg)
+![](./images/100/Picture100-27.png)
 
--  Then, specify an ADMIN password for the instance, and a confirmation of it. Make a note of this password.
+-  Then, specify an ADMIN password for the instance, adhering to the requirements, and then re-enter a password confirmation of it. Make a note of this password.
 
-![](./images/100/Picture100-29.jpeg)
+![](./images/100/Picture100-29.png)
 
--  For this lab, we will select Subscribe To A New Database License. If your organization owns Oracle Database licenses already, you may bring those license to your cloud service.
+-  For this lab, we will select __Subscribe To A New Database License__. If your organization owns Oracle Database licenses already, you may bring those license to your cloud service.
+Make sure everything is filled out correctly, then proceed to click on **Create Autonomous Data Warehouse**.
 
-![](./images/100/Picture100-37.jpg)
+![](./images/100/Picture100-37.png)
 
--  Make sure everything is filled out correctly, then proceed to click on **Create Autonomous Data Warehouse**.
+-  Your instance will begin provisioning. In a few minutes the state will turn from Provisioning to Available. At this point, your database is ready to be used!
 
-![](./images/100/Picture100-31.jpeg)
-
--  Your instance will begin provisioning. Once the state goes from Provisioning to Available, click on your display name to see its details.
-
-![](./images/100/Picture100-32.jpeg)
+![](./images/100/Picture100-32.png)
 
 -  You now have created your first Autonomous Data Warehouse instance. Have a look at your instance's details here including its name, database version, CPU count and storage size.
 
-![](./images/100/Picture100-38.jpg)
+![](./images/100/Picture100-38.png  )
 
 # Part 2. Connecting to ADW
 
@@ -117,16 +114,16 @@ As ADW only accepts secure connections to the database, you need to download a w
 
 -   In your database's instance details page, click **DB Connection**.
 
-![](./images/100/Picture100-34.jpeg)
+![](./images/100/Picture100-34.png)
 
 -   Under Download a Connection Wallet, click **Download**.
 
-![](./images/100/Picture100-15.jpg)
+![](./images/100/Picture100-15.png)
 
 -   Specify a password of your choice for the wallet. You will need this password when connecting to the database via SQL Developer later, and is also used as the JKS keystore password for JDBC applications that use JKS for security. Click **Download** to download the wallet file to your client machine.
 *Note: If you are prevented from downloading your Connection Wallet, it may be due to your browser's pop-blocker. Please disable it or create an exception for Oracle Cloud domains.*
 
-![](./images/100/Picture100-16.jpg)
+![](./images/100/Picture100-16.png)
 
 
 ## Connecting to the database using SQL Developer

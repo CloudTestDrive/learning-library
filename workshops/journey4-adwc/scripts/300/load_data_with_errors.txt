@@ -1,12 +1,12 @@
-
-/* Specify the real base_URL for your OCI Object Storage in the define base_URL line below*/
-/* change dwcsdemo to your real tenancy name. The name is case-sensitive. */
-/* change DEMO_DATA to your real bucket name. The name is case-sensitive. */
-/* change us-ashburn-1 to your real region name. The name is case-sensitive. */
+/* Specify the URL that you copied from your files in OCI Object Storage in the define base_URL line below*/
+/* change adwctraining8 to your real tenancy name. The name is case-sensitive. */
+/* change ADWCLab to your real bucket name. The name is case-sensitive. */
+/* change us-phoenix-1 to your real region name. The name is case-sensitive. */
 /* you can find these values on the OCI Console .. Storage .. Object Storage screen */
+
 set define on
 
-define base_URL='https://swiftobjectstorage.us-ashburn-1.oraclecloud.com/v1/dwcsdemo/DEMO_DATA'
+define base_URL='https://objectstorage.us-phoenix-1.oraclecloud.com/n/adwctraining8/b/ADWCLab/o';
 
 define chan_v3_error_dat_URL = '&base_URL/chan_v3_error.dat';
 

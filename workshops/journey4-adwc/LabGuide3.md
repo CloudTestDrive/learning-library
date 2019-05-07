@@ -115,7 +115,7 @@ Note that you do not need to specify anything other than the list of columns whe
 
 #### **STEP 4: Navigate to Object Storage**
 
--  From the Autonomous Data Warehouse console, pull out the left side menu from the top-left corner and select **Object Storage**. To revisit signing-in and navigating to ADW, please see Lab 1.
+-  From the Autonomous Data Warehouse console, pull out the left side menu from the top-left corner and select **Object Storage**. To revisit signing-in and navigating to ADW, please see [Lab 1](LabGuide1.md).
 
   ![](images/300/snap0014294.jpg)
 
@@ -145,7 +145,7 @@ In OCI Object Storage, a bucket is the terminology for a container of multiple f
 
     ![](images/300/snap0014302.jpg)
 
--   Using the browse button or drag-and-drop select the **sale1v3.dat** file you downloaded earlier and click Upload Object:
+-   Using the browse button or select all the files downloaded in the earlier step, click Upload and wait for the upload to complete:
 
     ![](images/300/snap0014303.jpg)
 
@@ -155,20 +155,24 @@ In OCI Object Storage, a bucket is the terminology for a container of multiple f
 
     ![](images/300/snap0014304.jpg)
 
-#### **STEP 7: Construct the URLs of the Files on Your OCI Object Storage**
--   Construct the base URL that points to the location of your files staged in the OCI Object Storage. The URL is structured as follows. The values for you to specify are in bold:
+#### **STEP 7: Copy the URL for the Files in Your OCI Object Storage**
+-   Copy following base URL that points to the location of your files staged in the OCI Object Storage. The simplest way to get this URL is from the "Object Details" in the right hand side ellipsis menu in the Object Store.
 
-    https://swiftobjectstorage.<**region_name**>.oraclecloud.com/v1/<**tenant_name**>/<**bucket_name**>/
 
--   The simplest way for you to find this information would be to be look at the **details** of your recently uploaded files.  
+ ![](images/300/ConstructURLs.png)
 
-![](images/300/ConstructURLs.jpg)
 
--   In this example below, the **region name** is us-phoenix-1, the **tenant name** is labs, and the **bucket name** is ADWCLab. This is all of the information you need to construct the swift storage URL above.
+ ![](images/300/ConstructUrls-2.png)
 
-![](images/300/ConstructUrls-2.jpg)
+ - Take a look at the URL you copied. In this example above, the **region name** is us-phoenix-1, the **tenant name** is adwctraining8, and the **bucket name** is ADWCLab.
 
--   **Save** the base URL you constructed to a note. We will use the base URL in the following steps.
+*Note:* The URL can also be constructed as below:
+
+https://objectstorage.<**region_name**>.oraclecloud.com/n/<**tenant_name**>/b/<**bucket_name**>/o
+
+
+
+-   **Save** the base URL you copied in a note. We will use the base URL in following steps.
 
 #### **STEP 8: Creating an Object Store Auth Token**
 
@@ -234,8 +238,8 @@ In order to access data in the Object Store you have to enable your database use
 
     -   Select **Oracle Cloud Storage** as source for the data load
 
-    -   Enter the URL of **channels.csv** as the file to load. You constructed the URL in STEP 8 Construct the URLs of the Files on Your OCI Object Storage. For example, the URL might look something like:
-        https://swiftobjectstorage.us-ashburn-1.oraclecloud.com/v1/ADWCTenancy/ADWCLab/channels.csv
+    -   Enter the URL of **channels.csv** as the file to load. You copied or constructed the URL in STEP 8 Copy the URLs of the Files on Your OCI Object Storage. For example, the URL might look something like:
+        https://objectstorage.us-phoenix-1.oraclecloud.com/n/labs/b/ADWCLab/o/channels.csv
 
     -   Select the Credential you previously created for authentication with the Object Store, **OBJ\_STORE\_CRED**
 
@@ -244,7 +248,7 @@ In order to access data in the Object Store you have to enable your database use
     -   Click the **Preview** button
 
 <!--![](./images/300/snap0014662.jpg)-->
-![](assets/LabGuide3-51e53dd3.png)
+![](./images/300/LabGuide3-51e53dd3.png)
 
 When you are satisfied with the data preview, click **NEXT**.
 
@@ -262,7 +266,7 @@ When you are satisfied with the data preview, click **NEXT**.
 
 When done with your investigation, click **NEXT**.
 
-![](./images/300/snap0014665.jpg)
+![](./images/300/snap0014665.png)
 
 
 -   The final screen reflects all your choices made in the Wizard. Click **FINISH** when you are ready to load the data into the table *CHANNELS_CLOUD*.
@@ -277,7 +281,7 @@ As an alternative to the wizard-guided data load, you can use the PL/SQL package
 
 -   Connected as your user in SQL Developer, copy and paste <a href="./scripts/300/load_data.txt" target="_blank">this code snippet</a> to SQL Developer worksheet. This scripts uses the **copy\_data** procedure of the **DBMS\_CLOUD** package to copy the data in the source files to the target tables you created before.
 
-    -   At the top of the script, specify the Object Store base URL in the definition of the **base\_URL** variable. You have constructed and saved this URL in the step "Construct the URLs of the Files on Your OCI Object Storage".
+    -   At the top of the script, specify the Object Store base URL in the definition of the **base\_URL** variable. You have copied and saved this URL in the step "Copy the URLs of the Files on Your OCI Object Storage" above.
 
 
     -   For the **credential_name** parameter in the **copy\_data** procedure, it is the name of the credential you defined in the step "Create a Database Credential for Your User" above.  You can use that credential.
@@ -286,9 +290,9 @@ As an alternative to the wizard-guided data load, you can use the PL/SQL package
 
     - Run the script.
 
-    ![](./images/300/snap0014550.jpg)
+    ![](./images/300/snap0014550.png)
 
-    - You have successfully loaded the sample tables. You can now run any sample query in the <a href="https://docs.oracle.com/database/122/DWHSG/part-relational-analytics.htm#DWHSG8493" target="_blank">relational analytics</a> section of the Oracle documentation. For example, to analyze the cumulative amount sold for specific customer IDs in quarter 2000, you could run the query in <a href="./scripts/300/query_tables.txt" target="_blank">this code snippet</a>. (<a href="https://docs.oracle.com/en/database/oracle/oracle-database/12.2/dwhsg/introduction-data-warehouse-concepts.html#GUID-452FBA23-6976-4590-AA41-1369647AD14D" target="_blank">Click Here</a> to read the Data Warehousing documentation.
+    - You have successfully loaded the sample tables. You can now run any sample query in the <a href="https://docs.oracle.com/database/122/DWHSG/part-relational-analytics.htm#DWHSG8493" target="_blank">relational analytics</a> section of the Oracle documentation. For example, to analyze the cumulative amount sold for specific customer IDs in quarter 2000, you could run the query in <a href="./scripts/300/query_tables.txt" target="_blank">this code snippet</a>. <a href="https://docs.oracle.com/en/database/oracle/oracle-database/12.2/dwhsg/introduction-data-warehouse-concepts.html#GUID-452FBA23-6976-4590-AA41-1369647AD14D" target="_blank">Click Here</a> to read more about Data Warehousing.
 
     ![](./images/300/Picture300-20.png)
 
@@ -300,7 +304,7 @@ As an alternative to the wizard-guided data load, you can use the PL/SQL package
     ```
     Notice how this table lists the past and current load operations in your schema.  Any data copy and data validation operation will have backed up records in your Cloud.
 
--   For an example of how to troubleshoot a data load, we will attempt to load a data file with the wrong format (chan_v3_error.dat).  Specifically, the default separator is the | character, but the channels_error.csv file uses a semicolon instead.  To attempt to load bad data, copy and paste <a href="./scripts/300/load_data_with_errors.txt" target="_blank">this code snippet</a> to a SQL Developer worksheet and run the script as your user in SQL Developer. Specify the URL that points to the **chan\_v3\_error.dat** file. You have constructed and saved the URL in the step "Construct the URLs of the Files on Your OCI Object Storage". Expect to see see "reject limit" errors when loading your data this time.
+-   For an example of how to troubleshoot a data load, we will attempt to load a data file with the wrong format (chan_v3_error.dat).  Specifically, the default separator is the | character, but the channels_error.csv file uses a semicolon instead.  To attempt to load bad data, copy and paste <a href="./scripts/300/load_data_with_errors.txt" target="_blank">this code snippet</a> to a SQL Developer worksheet and run the script as your user in SQL Developer. Specify the URL that points to the **chan\_v3\_error.dat** file. You have copied and saved the URL in the step "Copy the URLs of the Files on Your OCI Object Storage" above. Expect to see see "reject limit" errors when loading your data this time.
 
     ![](images/300/LabGuide3-3f756664.jpg)
 

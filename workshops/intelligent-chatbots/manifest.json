@@ -1,33 +1,46 @@
 {
     "workshop": {
-        "title": "Intelligent Chatbot Training Workshop",
-        "description": "Description of this workshop.",
+        "title": "Building Autonomous Chatbots",
+        "description": "Learn how to build Autonomous Chatbots in the Cloud.",
         "theme": "default",
-        "interactive":"https://launch.oracle.com/?",
+        "interactive":"https://launch.oracle.com/?chatbots",
          "versions": [
           {
-            "name": "Trial Account User Guide",
-            "description": "This User Guide should be reviewed if you acquired a Trial Account from Oracle. It provides the required Workshop guidance and prerequisites",
+            "name": "Requesting a Trial",
+            "description": "Get a free trial account to perform this lab.",
+            "imageUrl": "https://oracle.github.io/learning-library/workshops/common-content/images/common/Self-Service.png"
+          },
+          {
+            "name": "Lab 050",
+            "description": "Provisioning Oracle Autonomous Digital Assistant in your cloud trial account",
             "imageUrl": "https://oracle.github.io/learning-library/workshops/common-content/images/common/Self-Service.png"
           },
           {
             "name": "Lab 100",
-            "description": "Create Intelligent ChatBots with Intents, Entities, Utterances and Flow.",
-            "imageUrl": "https://www.oracle.com/assets/c78-oracle-intelligent-bots-3894709.jpg"
+            "description": "Create ChatBots with Intents, Entities, Utterances and Flow.",
+            "imageUrl": "images/manifest/c78-oracle-intelligent-bots-3894709.jpg"
           },
           {
             "name": "Lab 200",
-            "description": "Integrating Instant App and Web Channel with Intelligent Bot.",
-            "imageUrl": "https://www.oracle.com/assets/c78-03-mobility-3886479.jpg"
+            "description": "Integrating Instant App and Web Channel with Intelligent Bots.",
+            "imageUrl": "images/manifest/c78-03-mobility-3886479.jpg"
           }
         ],
         "labs": [
             {
                 "number": "0",
                 "filename": "README.md",
-                "title": "README",
+                "title": "First Steps",
                 "description": "Step-by-step workshop instructions",
-                "labels": {"version": "Trial Account User Guide"}
+                "labels": {"version": "Requesting a Trial"}
+
+            },
+            {
+                "number": "50",
+                "filename": "LabGuide050.md",
+                "title": "Lab 050: Provisioning Oracle Autonomous Digital Assistant",
+                "description": "Provision the required service to set up a chatbot in your cloud account.",
+                "labels": {"version": "Lab 050"}
 
             },
             {

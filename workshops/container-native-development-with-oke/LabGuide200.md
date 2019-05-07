@@ -136,7 +136,7 @@ Compartments are used to isolate resources within your OCI tenant. Role-based ac
 
 ### **STEP 5**: Launch a Cloud Compute Instance for Cluster Management
 
-Before we can launch a compute instance, we need two things: a Virtual Cloud Network to connect it to, and an SSH key pair to use for authentication. 
+Before we can launch a compute instance, we need two things: a Virtual Cloud Network to connect it to, and an SSH key pair to use for authentication.
 
 - Creating a new Virtual Cloud Network :
   - Navigate to "Networking" , "Virtual Cloud Networks" page using the menu in the upper left.  You should see the VCN that was created for the OKE cluster.
@@ -240,9 +240,9 @@ Before we can launch a compute instance, we need two things: a Virtual Cloud Net
 
   - Make the following selections in the **Configure Networking** form:
     - In the VCN Compartment field, ensure **Demo** is selected.
-    - In the VCN field, ensure **MyOpenVCN** is selected 
+    - In the VCN field, ensure **MyOpenVCN** is selected
     - In the Subnet Compartment field, ensure **Demo** is selected.
-    - In the Subnet field, select the one subnet that is present  
+    - In the Subnet field, select the subnet that begins with **oke-svclbsubnet-quick-cluster1**, which is in the **Public Subnets** section. Take care __not__ to select the subnet that begins with oke-subnet, as this one is a private subnet (not accessible from the internet).
 
     ![](images/200/MyOpenVCN.png)
 
@@ -285,6 +285,8 @@ Before we can launch a compute instance, we need two things: a Virtual Cloud Net
   - From _inside the SSH session_, run the following command to install the OCI CLI, which will allow you to interact with your cluster:
 
     `bash -c "$(curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh)"`
+
+    **CAUTION**: When copying the above command, be careful not to copy a newline character at the end. If you paste the command into your SSH session and it executes without you pressing enter, cancel the command with **Control-C**, then press the **up arrow** to retrieve it from the history, and press **enter** to run it without the newline character.
 
     ![](images/200/LabGuide200-41638e46.png)
 

@@ -127,7 +127,7 @@ Now that we have a display of our data, the next steps are to allow additions an
 
    ![](images/200/LabGuide200-cd415c35.png)
 
-- Select the row from the table you created earlier and press the **Edit Inventory** button.
+- Select the row from the table you created earlier and press the **Edit Inventory** button. Note that the Edit Inventory button will become selectable once an item is selected in **Live** mode.
 
   ![](images/200/LabGuide200-40720a3a.png)
 

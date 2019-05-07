@@ -51,6 +51,10 @@ In this lab, you log into Oracle Visual Builder and build a web application that
 
   ![](images/000JumpStart/JS9-2.PNG)
 
+- Select the **Empty Application** template and click **Next**.
+
+  ![](images/000JumpStart/JS9-4.PNG)
+
 - Enter the Application Name using a prefix of `charts-` followed by your `initials` and a suffix of `123`.
 
   **Application Name**

@@ -63,6 +63,13 @@
                 "title": "Lab 9: Configure Oracle Cloud Infrastructure Command Line Interface",
                 "description": "Instructions to configure Oracle Cloud Infrastructure Command Line Interface"
             },
+            
+            {
+                "number": "10",
+                "filename": "LabGuide1000AppDev.md",
+                "title": "Lab 10: Mastering DevOps in the Oracle Cloud",
+                "description": "Docker Images for instant connectivity to Oracle Autonomous Database"
+            },
             {
                 "number": "Appendix",
                 "filename": "Appendix.md",

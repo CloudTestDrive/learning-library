@@ -42,7 +42,7 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 - From this point forward, all command line instructions should be run _inside your SSH session_, not in a command prompt/shell on your local machine. Switch to the `root` user in your SSH session and install the prerequisite packages (and a few extras) by running:
 
   ```bash
-  sudo yum -y install docker kubectl git caca-utils
+  sudo yum -y install docker-engine kubectl git caca-utils
   ```
 
   **NOTE**: Docker and kubectl are prerequisites of Fn. Git and caca-utils are used in this lab for downloading repositories from GitHub and displaying images in the terminal, respectively.
@@ -120,7 +120,7 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 - Now that you have the function 'code', you can deploy it to the local Fn Server you started earlier by running the following commands in your terminal window:
 
   ```bash
-  fn deploy --app imgconvert --local
+  fn deploy --create-app --app imgconvert --local
   ```
 
   **NOTE**: The `--app imgconvert` tells Fn to create a new application named imgconvert and associate this function with it. In general, the application can be named anything you like, but by default the name will show up in the function URL. Since the product catalog application is expecting the app to be named `imgconvert`, don't alter the name.
@@ -285,7 +285,7 @@ During this lab, you will take on the **Lead Developer Persona** and extend your
 - Now we're ready to **Deploy the function** (and application) to the remote Fn Server using the same command you used in **STEP 3**, but without the --local flag.
 
   ```bash
-  fn deploy --app imgconvert
+  fn deploy --create-app --app imgconvert
   ```
 
   ![](images/500/19.png)

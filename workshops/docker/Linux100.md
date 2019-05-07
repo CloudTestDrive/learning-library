@@ -44,14 +44,14 @@ This Lab and Lab 200 assume you have went through the 050 Set Up Lab and have SS
 
 - **Type** the following:
 
-```
- cd
- docker version
-```
+  ```
+  cd
+  docker version
+  ```
 
-The information on your docker engine should be displayed:
+  The information on your docker engine should be displayed:
 
-![](images/100Linux/Picture100-2.png)
+  ![](images/100Linux/Picture100-2.png)
 
 ### **STEP 3**: See What is running
 
@@ -59,11 +59,11 @@ Let's take a quick look at what is running in the docker engine, if this is a ne
 
 - **Type** the following:
 
-```
-docker ps
-```
+  ```
+  docker ps
+  ```
 
-![](images/100Linux/Picture100-3.png)
+  ![](images/100Linux/Picture100-3.png)
 
 ### **STEP 4**: Run the restclient docker image from docker hub
 
@@ -80,11 +80,11 @@ We will now download and create a container based on an existing docker image st
 
 - **Type OR cut and paste** the following (all on one line):
 
-```
-docker run -d -it --rm --name restclient -p=8002:8002 -e DS='json' wvbirder/restclient
-```
+  ```
+  docker run -d -it --rm --name restclient -p=8002:8002 -e DS='json' wvbirder/restclient
+  ```
 
-![](images/100Linux/Picture100-4.png)
+  ![](images/100Linux/Picture100-4.png)
 
 ### **STEP 5**: Check running containers
 
@@ -92,41 +92,41 @@ Again using the `docker ps` command, we should see our newly spawned docker cont
 
 - **Type** the following:
 
-```
-docker ps
-```
+  ```
+  docker ps
+  ```
 
 - Note that the container id is unique, and the container's port is mapped to 8002, which is the same as the Host's port.
 
-![](images/100Linux/Picture100-5.png)
+  ![](images/100Linux/Picture100-5.png)
 
 ### **STEP 6**: Check the Application with a browser
 
 - We need the Public IP address to test the deployment. Navigate in a browser to your Oracle Trial account and from the hamburger menu in the upper left hand side of the page select go to **Compute-->Instances**:
 
-![](images/100Linux/26.png)
+  ![](images/100Linux/26.png)
 
 - Click on the **Docker** instance link
 
-![](images/100Linux/Picture100-5-4.png)
+  ![](images/100Linux/Picture100-5-4.png)
 
 - Note the Public IP address (In this example, `129.213.119.105`
 
-![](images/100Linux/Picture100-5-6.png)
+  ![](images/100Linux/Picture100-5-6.png)
 
-- Go to this URL substituting your Public IP address
+- In a local browser go to the following URL substituting your Public IP address:
 
-```
-http://<Public-IP>:8002/
-```
+  ```
+  http://<Public-IP>:8002/
+  ```
 
-![](images/100Linux/Picture100-6.png)
+  ![](images/100Linux/Picture100-6.png)
 
 - Now enter this URL into your browser :  `http://<Public-IP>:8002/products`
 
-If your browser contains a JSON Formatter add-on then the output will look something like this (else, it will just be unformatted text, which is OK):
+  If your browser contains a JSON Formatter add-on then the output will look something like this (else, it will just be unformatted text, which is OK):
 
-![](images/100Linux/Picture100-7.png)
+  ![](images/100Linux/Picture100-7.png)
 
 ### **STEP 7**: Stop the Container
 
@@ -134,19 +134,19 @@ If your browser contains a JSON Formatter add-on then the output will look somet
 
 - **Type** the following:
 
-```
-docker stop restclient
-```
+  ```
+  docker stop restclient
+  ```
 
 - Now, entering "docker ps -a" (which will show the status of ALL containers RUNNING or STOPPED) shows nothing proving the container was deleted upon stopping it.
 
 - **Type** the following:
 
-```
-docker ps -a
-```
+  ```
+  docker ps -a
+  ```
 
-![](images/100Linux/Picture100-7.4.png)
+  ![](images/100Linux/Picture100-7.4.png)
 
 ### **STEP 8**: Start another Container with a different HOST Port
 
@@ -154,15 +154,15 @@ docker ps -a
 
 - **Type** the following:
 
-```
-docker run -d -it --rm --name restclient -p=18002:8002 -e DS='json' wvbirder/restclient
-```
+  ```
+  docker run -d -it --rm --name restclient -p=18002:8002 -e DS='json' wvbirder/restclient
+  ```
 
 - If you change your browsers port to 18002, you will see that the Host server is using 18002 and mapping that to our container's port 8002.
 
-![](images/100Linux/Picture100-8.png)
+  ![](images/100Linux/Picture100-8.png)
 
-![](images/100Linux/Picture100-9.png)
+  ![](images/100Linux/Picture100-9.png)
 
 ### **STEP 9**: Inspect the Container's Network and IP Address
 
@@ -170,29 +170,28 @@ docker run -d -it --rm --name restclient -p=18002:8002 -e DS='json' wvbirder/res
 
  - **Type** the following:
 
-```
-docker network inspect bridge
-```
+  ```
+  docker network inspect bridge
+  ```
 
 - This returns information about all the containers running on the default bridge. We see that our `restclient` container is assigned IP Address 172.17.0.2. You can ping that address from the Host server.
 
-![](images/100Linux/Picture100-10.png)
+  ![](images/100Linux/Picture100-10.png)
 
 - Ping the `restclient` container IP Address: (in this example the IP was 172.17.0.2)
 
 - **Type** the following:
 
-```
-ping 172.17.0.2 -c3
-```
+  ```
+  ping 172.17.0.2 -c3
+  ```
 
-![](images/100Linux/Picture100-11.png)
+  ![](images/100Linux/Picture100-11.png)
 
 - Finally, **STOP** the `restclient` container as we will be re-provisioning it in Lab 200 by **typing**:
 
-```
-docker stop restclient
-```
-
+  ```
+  docker stop restclient
+  ```
 
 **You are ready to proceed to [Lab 200](Linux200.md)**

@@ -84,11 +84,15 @@ You can create a shared file system in the cloud using the File Storage service.
    - **Name:** FSS-Storage
    - **Avaiability Domain:** AD-1
 
+    ![](img/image002.png)
+
 4. Under **Mount Target Information** click on **Edit Details** and enter the following:
 
    - **Name:** FSS-Mount
    - **Virtual Cloud Network:** Select your VCN
    - **Subnet:** select a subnet for the mount target
+  
+    ![](img/image001.png)
 
 5. Click **Create**:
 

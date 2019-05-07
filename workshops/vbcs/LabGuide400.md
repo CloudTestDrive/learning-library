@@ -306,6 +306,8 @@ The action chain is now ready to do it's work. All we need to do is tell our app
 
 - Drag a "Text" component from the left column into the **Inventory Detail** page. You'll see a text box with a placeholder message of "Bind Text."
 
+**NOTE:** If "Bind Text" does not appear in the page structure you can find it by selecting **Code** to the right of **Live** and **Design Mode** then selecting the text line from the code.
+
   ![](images/400/LabGuide400-7a0067c2.png)
 
 - Now we'll set the text to be the data retrieved from the REST call. In the right hand navigation panel paste the following into the value field.

@@ -43,14 +43,7 @@
                 "number": "400",
                 "filename": "L400.md",
                 "title": "Lab 400: Create Data Visualizations",
-                "description": "Create data visualizations with Autonomous Analytics to review sales performance and better understand the factors that affect good credit",
-                "labels": {"version": "Self-Guided"}
-            },
-            {
-                "number": "500",
-                "filename": "DownloadLinks.md",
-                "title": "Download Links",
-                "description": "You can download files for this workshop here",
+                "description": "Create data visualizations with Oracle Analytics Cloud to review sales performance and better understand the factors that affect good credit",
                 "labels": {"version": "Self-Guided"}
             }
         ]

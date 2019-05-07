@@ -1,6 +1,6 @@
 <table class="tbl-heading"><tr><td class="td-logo">![](images/obe_tag.png)
 
-October 18, 2018
+November 08, 2018
 </td>
 <td class="td-banner">
 # Lab 7: Working with REST APIs

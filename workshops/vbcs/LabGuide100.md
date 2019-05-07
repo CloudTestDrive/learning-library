@@ -29,6 +29,10 @@ This is the first of several labs that are part of the **Oracle Visual Builder C
 
   ![](images/100/LabGuide100-f9530cdb.png)
 
+- Select the **Empty Application** template and click **Next**.
+
+  ![](images/100/LabGuide100-9-4.png)
+
 - On Details screen enter the following data and click on **Next**.
 
   In the Create Application dialog box, enter the following, then press **Create**.

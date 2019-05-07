@@ -43,15 +43,11 @@ At this point, you should have performed the following:
 
 You want to secure your data from the desktop all the way from the client application to the server where your data is stored.  Password credentials for connecting to databases can now be stored in a client-side Oracle wallet, a secure software container used to store authentication and signing credentials.  This wallet usage can simplify large-scale deployments that rely on password credentials for connecting to databases. When this feature is configured, application code, batch jobs, and scripts no longer need embedded user names and passwords. Risk is reduced because such passwords are no longer exposed in the clear, and password management policies are more easily enforced without changing application code whenever user names or passwords change.
 
-- Go to the directory that you saved your Connection Wallet file from the previous lab.  Unzip this zipped file.
+- Go to the directory that you saved your Connection Wallet file from the previous lab.  This will be a zipped file that you will select or drag/drop into DVD.
 
    ![](./images/900/image008.jpg)
-   ![](./images/900/image009.png)
 
-- You will need the following two files to create the secure connection.
-
-   - cwallet.sso
-   - tnsnames.ora
+*Note:* If you have an older version of DVD, you may have to unzip the wallet and select the specific "cwallet.sso" wallet within it.
 
 # Create a View using Tables in the SH Schema
 
@@ -115,17 +111,15 @@ For simplicity's sake, in this exercise we will use the SH schema provided and w
    | Connection Info       | Entry                                             |  
    | --------------------- | :--------------------------------------------- |
    | Connection Name:      | Type in 'SALES_HISTORY'                             |
-   | Host:                 | (Copy from tnsnames.ora) e.g. adb.us-phoenix-1.oraclecloud.com |
-   | Port:                 | (Copy from tnsnames.ora) e.g. 1522                                              |
-   | Client Credentials:   | Click 'Select' and select the file "cwallet.sso" from your unzipped **Wallet** in Step 2   |
+   | Client Credentials:   | Select or drag/drop the **Wallet zip file** "wallet_*Your DB Name*.zip"" from Step 2   |
    | Username:             | Insert username created in previous labs.  Same as SQL Developer credentials. |                                            
    | Password              | Insert password created in previous labs.  Same as SQL Developer credentials. |
-   | Service Name:         | (Copy from tnsnames.ora) e.g. tuak89quycc88vqkzengdw1high.adwc.oraclecloud.com |
+   | Service Name:         | Select your service preference here (for eg. the "_high" service) |
 
   - After completing the fields, click on __‘Save’__ button.
-  *Note*: If you are running an older version of DVD, you may not see an option to select Client Credentials. Update your DVD or read about connections in older versions in the <a href="https://docs.oracle.com/en/middleware/bi/data-visualization-desktop/bidvd/create-connections-oracle-adw.html#GUID-D3542D1C-B21F-45D1-86F7-DBAAE43A5574" target="_blank"> DVD User's Guide. </a>
+  *Note*: If you are running an older version of DVD, you may have to copy your Service Name from tnsnames.ora within the wallet zip file. Even older versions may not have the option to select Client Credentials. Update your DVD or read about connections in older versions in the <a href="https://docs.oracle.com/en/middleware/bi/data-visualization-desktop/bidvd/create-connections-oracle-adw.html#GUID-D3542D1C-B21F-45D1-86F7-DBAAE43A5574" target="_blank"> DVD User's Guide. </a>
 
-   ![](./images/900/image023.jpg)
+   ![](./images/900/image023.png)
 
   - Upon success of creating a new connection to the Autonomous Data Warehouse, select the __Create__ button and select __Data Set__.  
 
