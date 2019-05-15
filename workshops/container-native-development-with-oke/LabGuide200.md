@@ -25,7 +25,7 @@ During this lab, you will take on the **DevOps Engineer Persona**. You will prov
 ## Required Artifacts
 
 - The following lab requires:
-  - an Oracle Cloud Trial Account - please click on the following link to create your <a class="trial-link" href="https://myservices.us.oraclecloud.com/mycloud/signup?sourceType=:ow:evp:cpo::RC_EMMK181016P00007:Virtual_WS_DEV&intcmp=:ow:evp:cpo::RC_EMMK181016P00007:Virtual_WS_DEV" target="_trial">Free Account</a>
+  - an Oracle Cloud Trial Account - please click on the following link to create your <a class="trial-link" href="https://myservices.us.oraclecloud.com/mycloud/signup?sourceType=:eng:lw:ie::RC_EMMK190301P00255:160519_jonthebeach">Free Account</a>
 
 # Provision Kubernetes Using the OCI Console
 
